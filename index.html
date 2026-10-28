@@ -1,122 +1,1021 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kho Bài Tập & Trò Chơi Học Tập</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #4f46e5;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
+    <title>Vũ Trụ Học Tập - Learning Universe</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Quicksand & Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastel: {
+                            purple: '#E2D4F9',
+                            'purple-dark': '#B8A1E3',
+                            mint: '#D1F2EB',
+                            'mint-dark': '#9BE3D0',
+                            pink: '#FDE2E4',
+                            'pink-dark': '#F9B7BE',
+                            blue: '#D0E1FD',
+                            'blue-dark': '#93BDFC',
+                            yellow: '#FFF1C5',
+                            'yellow-dark': '#FCE38A',
+                            bg: '#F6F5FA',
+                            card: '#FFFFFF',
+                            text: '#4A4A68'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'Quicksand', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-slow': 'float 9s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'twinkle': 'twinkle 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(3deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.8', transform: 'scale(1)' },
+                            '50%': { opacity: '1', transform: 'scale(1.05)' },
+                        },
+                        twinkle: {
+                            '0%, 100%': { opacity: '0.3', transform: 'scale(0.8)' },
+                            '50%': { opacity: '1', transform: 'scale(1.2)' },
+                        }
+                    }
+                }
+            }
         }
+    </script>
+
+    <style>
         body {
             font-family: 'Nunito', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        header {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom-left-radius: 24px;
-            border-bottom-right-radius: 24px;
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.3);
-        }
-        header h1 { margin: 0; font-size: 2.2rem; font-weight: 800; }
-        header p { margin: 8px 0 0 0; font-size: 1.1rem; font-weight: 600; }
-        .container { max-width: 1100px; margin: -20px auto 40px auto; padding: 0 20px; }
-        
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #334155;
-            margin: 30px 0 15px 0;
+            background-color: #F6F5FA;
+            color: #4A4A68;
+            overflow-x: hidden;
         }
 
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+        /* Background Stars pattern */
+        .space-bg {
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(226, 212, 249, 0.5) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(209, 242, 235, 0.6) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(208, 225, 253, 0.4) 0%, transparent 30%),
+                radial-gradient(circle at 80% 15%, rgba(253, 226, 228, 0.5) 0%, transparent 20%);
         }
 
-        .card {
-            background: var(--card-bg);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F6F5FA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #B8A1E3;
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #93BDFC;
         }
 
-        .card-header {
-            padding: 16px 20px;
-            background: #fafafa;
-            border-bottom: 1px solid #f1f5f9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .card-title { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 0; }
-        .tag { background: #e0e7ff; color: #4338ca; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
-
-        .sheet-img-wrapper {
+        /* Meteor animation */
+        .star-field {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 380px;
-            overflow: hidden;
-            background: #f1f5f9;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
-        .sheet-img-wrapper img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-        .card-body {
-            padding: 15px 20px;
-            text-align: center;
-        }
-        .btn-download {
-            display: inline-block;
-            background: #10b981;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-        }
-        .btn-download:hover { background: #059669; }
     </style>
 </head>
-<body>
-    <header>
-        <h1>📚 KHO BÀI TẬP & TRÒ CHƠI HỌC TẬP</h1>
-        <p>Góc học tập tương tác dành cho học sinh</p>
-    </header>
+<body class="space-bg min-h-screen flex flex-col relative selection:bg-pastel-purple selection:text-purple-900">
 
-    <div class="container">
-        <div class="section-title">📝 Phiếu Bài Tập Ôn Tập</div>
-        <div class="grid-layout">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">📌 Ôn tập Luyện từ và câu: Tính từ</h3>
-                    <span class="tag">Tiếng Việt 4</span>
+    <!-- CANVAS NGÔI SAO LẤP LÁNH BACKGROUND -->
+    <canvas id="starCanvas" class="star-field"></canvas>
+
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-40 px-4 py-3 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto glass-card rounded-3xl px-6 py-3 shadow-sm flex items-center justify-between border-2 border-white/80">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pastel-purple to-pastel-pink flex items-center justify-center text-2xl shadow-inner transform group-hover:rotate-12 transition-transform duration-300">
+                    🚀
                 </div>
-                <div class="sheet-img-wrapper">
-                    <img src="image.png" alt="Bài tập Tính từ">
+                <div>
+                    <span class="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-500 to-pink-500 tracking-wide">
+                        VŨ TRỤ HỌC TẬP
+                    </span>
+                    <span class="block text-[10px] uppercase tracking-widest text-purple-400 font-bold">Learning Universe</span>
                 </div>
-                <div class="card-body">
-                    <a href="image.png" target="_blank" class="btn-download">🔍 Xem full & Tải về in</a>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-2 bg-pastel-bg/60 p-1.5 rounded-2xl border border-white/60">
+                <a href="#about" class="px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:text-purple-600 hover:bg-white transition-all">Khám Phá</a>
+                <a href="#exercises" class="px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:text-purple-600 hover:bg-white transition-all">Bài Tập Vũ Trụ</a>
+                <a href="#games" class="px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:text-purple-600 hover:bg-white transition-all">Trò Chơi</a>
+                <a href="#leaderboard" class="px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:text-purple-600 hover:bg-white transition-all">Bảng Vàng</a>
+            </nav>
+
+            <!-- User Stats Widget -->
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 bg-pastel-yellow/80 border border-pastel-yellow-dark/50 px-3.5 py-1.5 rounded-2xl shadow-sm">
+                    <span class="text-xl animate-bounce">🌠</span>
+                    <div>
+                        <div class="text-[10px] font-extrabold uppercase text-amber-700 leading-none">Sao Băng</div>
+                        <div id="starCount" class="text-sm font-black text-amber-800">120</div>
+                    </div>
+                </div>
+
+                <div class="hidden sm:flex items-center gap-2 bg-pastel-purple/50 border border-pastel-purple-dark/30 px-3 py-1.5 rounded-2xl">
+                    <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-lg shadow-sm">
+                        👨‍🚀
+                    </div>
+                    <span id="userRankTitle" class="text-xs font-bold text-purple-800">Tập Sự</span>
                 </div>
             </div>
         </div>
+    </header>
+
+    <!-- BANNER HERO SECTION -->
+    <section id="about" class="relative pt-6 pb-12 px-4 z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Text Content -->
+            <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-pastel-purple shadow-sm text-xs md:text-sm font-bold text-purple-700 animate-pulse-glow">
+                    <span class="text-base">✨</span> Chào mừng Phi Hành Gia Nhí đến với hành trình mới!
+                </div>
+                
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-gray-800 leading-tight">
+                    Chinh Phục <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500">Tri Thức</span>
+                    <br>Trong Vũ Trụ Bao La! 🪐
+                </h1>
+
+                <p class="text-base md:text-lg text-gray-600 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Học tập là một chuyến phiêu lưu kỳ thú qua các hành tinh kiến thức. Làm bài tập, tham gia trò chơi hấp dẫn và thu thập vô vàn **Sao Băng thưởng** ngay hôm nay!
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                    <a href="#exercises" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-400 to-indigo-400 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold shadow-lg shadow-purple-200 transform hover:-translate-y-1 active:translate-y-0 transition-all flex items-center gap-3">
+                        <i class="fa-solid font-bold fa-rocket text-xl"></i> Lên Đường Học Ngay
+                    </a>
+                    <a href="#games" class="px-8 py-4 rounded-2xl bg-white hover:bg-pastel-mint/50 text-emerald-700 font-extrabold border-2 border-emerald-200 shadow-md transform hover:-translate-y-1 transition-all flex items-center gap-3">
+                        <i class="fa-solid fa-gamepad text-xl text-emerald-500"></i> Chơi Trò Chơi
+                    </a>
+                </div>
+
+                <!-- Quick Stats Badges -->
+                <div class="pt-6 grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0">
+                    <div class="bg-white/70 p-3 rounded-2xl border border-pastel-pink text-center shadow-sm">
+                        <div class="text-xl md:text-2xl font-black text-pink-500">4+</div>
+                        <div class="text-xs text-gray-500 font-bold">Hành Tinh Môn Học</div>
+                    </div>
+                    <div class="bg-white/70 p-3 rounded-2xl border border-pastel-blue text-center shadow-sm">
+                        <div class="text-xl md:text-2xl font-black text-blue-500">50+</div>
+                        <div class="text-xs text-gray-500 font-bold">Thử Thách Thú Vị</div>
+                    </div>
+                    <div class="bg-white/70 p-3 rounded-2xl border border-pastel-mint text-center shadow-sm">
+                        <div class="text-xl md:text-2xl font-black text-emerald-500">100%</div>
+                        <div class="text-xs text-gray-500 font-bold">Vui Vẻ & Miễn Phí</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Hero Illustration (Custom SVG/CSS Composition) -->
+            <div class="lg:col-span-5 flex justify-center relative">
+                <div class="relative w-72 h-72 sm:w-96 sm:h-96">
+                    <!-- Central Planet Pastel -->
+                    <div class="absolute inset-0 m-auto w-56 h-56 sm:w-72 sm:h-72 rounded-full bg-gradient-to-tr from-pastel-purple via-pastel-pink to-pastel-yellow shadow-2xl flex items-center justify-center animate-pulse-glow border-4 border-white">
+                        <!-- Planet Ring -->
+                        <div class="absolute w-80 sm:w-96 h-20 border-8 border-white/60 rounded-full transform -rotate-12 pointer-events-none shadow-sm"></div>
+                    </div>
+
+                    <!-- Floating Astronaut Kid SVG/Emoji -->
+                    <div class="absolute top-4 right-4 animate-float">
+                        <div class="w-24 h-24 sm:w-28 sm:h-28 bg-white/90 rounded-3xl p-3 shadow-xl border-2 border-purple-200 flex flex-col items-center justify-center text-center backdrop-blur-sm transform rotate-6">
+                            <span class="text-4xl sm:text-5xl">👨‍🚀</span>
+                            <span class="text-[10px] font-black text-purple-600 mt-1 uppercase">Phi Hành Gia</span>
+                        </div>
+                    </div>
+
+                    <!-- Satellite / Rocket floating -->
+                    <div class="absolute bottom-6 left-2 animate-float-slow">
+                        <div class="w-20 h-20 bg-pastel-mint/90 rounded-2xl p-2 shadow-lg border-2 border-emerald-200 flex items-center justify-center text-3xl transform -rotate-12">
+                            🛰️
+                        </div>
+                    </div>
+
+                    <!-- Little Star Badges Floating -->
+                    <div class="absolute top-1/2 -left-6 animate-twinkle text-3xl">⭐</div>
+                    <div class="absolute bottom-20 -right-4 animate-twinkle text-2xl" style="animation-delay: 1s;">🪐</div>
+                    <div class="absolute top-2 left-1/3 animate-twinkle text-3xl" style="animation-delay: 1.5s;">🌟</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 2: THƯ MỤC BÀI TẬP VŨ TRỤ -->
+    <section id="exercises" class="py-12 px-4 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-pastel-purple text-purple-800 font-extrabold text-xs uppercase tracking-wider mb-2">
+                    🪐 Danh Sách Thử Thách
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-gray-800">
+                    BÀI TẬP VŨ TRỤ
+                </h2>
+                <p class="text-gray-600 font-medium text-sm md:text-base mt-2">
+                    Chọn một hành tinh môn học để bắt đầu hành trình thu thập Sao Băng kiến thức nhé!
+                </p>
+            </div>
+
+            <!-- Planet Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8" id="subjectFilter">
+                <button onclick="filterSubject('all')" class="filter-btn active px-5 py-2.5 rounded-2xl font-bold text-sm bg-purple-600 text-white shadow-md transition-all">
+                    🌍 Tất Cả Hành Tinh
+                </button>
+                <button onclick="filterSubject('math')" class="filter-btn px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-gray-600 hover:bg-pastel-blue shadow-sm border border-gray-100 transition-all">
+                    📐 Toán Học (Sao Hỏa)
+                </button>
+                <button onclick="filterSubject('vietnamese')" class="filter-btn px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-gray-600 hover:bg-pastel-pink shadow-sm border border-gray-100 transition-all">
+                    📖 Tiếng Việt (Sao Kim)
+                </button>
+                <button onclick="filterSubject('science')" class="filter-btn px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-gray-600 hover:bg-pastel-mint shadow-sm border border-gray-100 transition-all">
+                    🔬 Khoa Học (Sao Mộc)
+                </button>
+                <button onclick="filterSubject('english')" class="filter-btn px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-gray-600 hover:bg-pastel-yellow shadow-sm border border-gray-100 transition-all">
+                    🔤 Tiếng Anh (Sao Thủy)
+                </button>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="exerciseGrid">
+                <!-- Card 1: Math -->
+                <div class="exercise-card math glass-card rounded-3xl p-6 shadow-md border-2 border-pastel-blue hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-black bg-pastel-blue text-blue-800">Hành Tinh Toán Học</span>
+                            <span class="text-xs font-bold text-amber-600 flex items-center gap-1"><i class="fa-solid fa-star text-amber-400"></i> +20 Sao</span>
+                        </div>
+                        <div class="w-16 h-16 rounded-2xl bg-pastel-blue/60 flex items-center justify-center text-3xl mb-4 shadow-inner">
+                            🔢
+                        </div>
+                        <h3 class="text-xl font-black text-gray-800 mb-2">Bảng Cửu Chương Vũ Trụ</h3>
+                        <p class="text-xs text-gray-500 font-medium mb-4">Luyện tập phép nhân và tính nhanh cùng các con số bí ẩn trên Trạm Không Gian.</p>
+                    </div>
+                    <div>
+                        <div class="w-full bg-gray-100 rounded-full h-2 mb-4 overflow-hidden">
+                            <div class="bg-pastel-blue-dark h-2 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <button onclick="openQuizModal('math')" class="w-full py-3 rounded-2xl bg-pastel-blue hover:bg-blue-300 text-blue-900 font-extrabold text-sm transition-colors shadow-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Làm Bài Tập
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Vietnamese -->
+                <div class="exercise-card vietnamese glass-card rounded-3xl p-6 shadow-md border-2 border-pastel-pink hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-black bg-pastel-pink text-pink-800">Hành Tinh Tiếng Việt</span>
+                            <span class="text-xs font-bold text-amber-600 flex items-center gap-1"><i class="fa-solid fa-star text-amber-400"></i> +15 Sao</span>
+                        </div>
+                        <div class="w-16 h-16 rounded-2xl bg-pastel-pink/60 flex items-center justify-center text-3xl mb-4 shadow-inner">
+                            📚
+                        </div>
+                        <h3 class="text-xl font-black text-gray-800 mb-2">Giải Mã Tên Các Chòm Sao</h3>
+                        <p class="text-xs text-gray-500 font-medium mb-4">Tìm từ đúng chính tả, luyện từ và câu qua câu đố ngữ văn cực hấp dẫn.</p>
+                    </div>
+                    <div>
+                        <div class="w-full bg-gray-100 rounded-full h-2 mb-4 overflow-hidden">
+                            <div class="bg-pastel-pink-dark h-2 rounded-full" style="width: 40%"></div>
+                        </div>
+                        <button onclick="openQuizModal('vietnamese')" class="w-full py-3 rounded-2xl bg-pastel-pink hover:bg-pink-300 text-pink-900 font-extrabold text-sm transition-colors shadow-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Làm Bài Tập
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Science -->
+                <div class="exercise-card science glass-card rounded-3xl p-6 shadow-md border-2 border-pastel-mint hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-black bg-pastel-mint text-emerald-800">Hành Tinh Khoa Học</span>
+                            <span class="text-xs font-bold text-amber-600 flex items-center gap-1"><i class="fa-solid fa-star text-amber-400"></i> +25 Sao</span>
+                        </div>
+                        <div class="w-16 h-16 rounded-2xl bg-pastel-mint/60 flex items-center justify-center text-3xl mb-4 shadow-inner">
+                            🪐
+                        </div>
+                        <h3 class="text-xl font-black text-gray-800 mb-2">Bí Uẩn Hệ Mặt Trời</h3>
+                        <p class="text-xs text-gray-500 font-medium mb-4">Khám phá thứ tự các hành tinh, hiện tượng tự nhiên trong thiên văn học.</p>
+                    </div>
+                    <div>
+                        <div class="w-full bg-gray-100 rounded-full h-2 mb-4 overflow-hidden">
+                            <div class="bg-pastel-mint-dark h-2 rounded-full" style="width: 90%"></div>
+                        </div>
+                        <button onclick="openQuizModal('science')" class="w-full py-3 rounded-2xl bg-pastel-mint hover:bg-emerald-300 text-emerald-900 font-extrabold text-sm transition-colors shadow-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Làm Bài Tập
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: English -->
+                <div class="exercise-card english glass-card rounded-3xl p-6 shadow-md border-2 border-pastel-yellow hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-black bg-pastel-yellow text-amber-800">Hành Tinh Tiếng Anh</span>
+                            <span class="text-xs font-bold text-amber-600 flex items-center gap-1"><i class="fa-solid fa-star text-amber-400"></i> +20 Sao</span>
+                        </div>
+                        <div class="w-16 h-16 rounded-2xl bg-pastel-yellow/60 flex items-center justify-center text-3xl mb-4 shadow-inner">
+                            🚀
+                        </div>
+                        <h3 class="text-xl font-black text-gray-800 mb-2">Space Vocabulary</h3>
+                        <p class="text-xs text-gray-500 font-medium mb-4">Học từ vựng Tiếng Anh chủ đề vũ trụ, hành tinh và các vì sao.</p>
+                    </div>
+                    <div>
+                        <div class="w-full bg-gray-100 rounded-full h-2 mb-4 overflow-hidden">
+                            <div class="bg-pastel-yellow-dark h-2 rounded-full" style="width: 20%"></div>
+                        </div>
+                        <button onclick="openQuizModal('english')" class="w-full py-3 rounded-2xl bg-pastel-yellow hover:bg-amber-300 text-amber-900 font-extrabold text-sm transition-colors shadow-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Làm Bài Tập
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: THƯ MỤC TRÒ CHƠI KHÁM PHÁ (INTERACTIVE MINI-GAME) -->
+    <section id="games" class="py-12 px-4 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-pastel-mint text-emerald-800 font-extrabold text-xs uppercase tracking-wider mb-2">
+                    🎮 Vừa Học Vừa Chơi
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-gray-800">
+                    TRÒ CHƠI KHÁM PHÁ
+                </h2>
+                <p class="text-gray-600 font-medium text-sm md:text-base mt-2">
+                    Tham gia các Mini-Game vũ trụ tương tác trực tiếp để nhận vô số điểm thưởng!
+                </p>
+            </div>
+
+            <!-- Game Container -->
+            <div class="glass-card rounded-3xl border-2 border-white p-6 md:p-8 shadow-xl max-w-4xl mx-auto">
+                <!-- Game Tabs & Info Bar -->
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-pastel-purple flex items-center justify-center text-2xl">
+                            ☄️
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-black text-gray-800">Game: Bắn Thiên Thạch Đúng</h3>
+                            <p class="text-xs text-gray-500 font-bold">Bắn trúng Thiên Thạch mang đáp án chính xác!</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-pastel-bg px-4 py-2 rounded-2xl border border-gray-200">
+                        <div class="text-center">
+                            <span class="text-[10px] font-bold uppercase text-gray-400 block">Điểm Game</span>
+                            <span id="gameScore" class="text-lg font-black text-purple-600">0</span>
+                        </div>
+                        <div class="h-6 w-px bg-gray-300"></div>
+                        <div class="text-center">
+                            <span class="text-[10px] font-bold uppercase text-gray-400 block">Thời Gian</span>
+                            <span id="gameTimer" class="text-lg font-black text-pink-600">30s</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canvas Game Viewport -->
+                <div class="relative w-full h-80 sm:h-96 rounded-2xl bg-slate-900 overflow-hidden shadow-inner border-4 border-pastel-purple/50 flex flex-col items-center justify-center" id="gameContainer">
+                    <canvas id="gameCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+                    
+                    <!-- Start Overlay -->
+                    <div id="gameStartOverlay" class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6 z-20">
+                        <span class="text-6xl mb-3 animate-float">🚀</span>
+                        <h4 class="text-2xl font-black text-white mb-2">Sẵn Sàng Làm Phi Hành Gia?</h4>
+                        <p class="text-sm text-purple-200 max-w-md mb-6 font-medium">
+                            Các Thiên Thạch mang phép tính sẽ rơi xuống. Nhấp chuột hoặc chạm vào Thiên Thạch chứa đáp án ĐÚNG để phá hủy chúng!
+                        </p>
+                        <button onclick="startGame()" class="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-pastel-purple-dark to-purple-600 hover:from-purple-500 hover:to-indigo-600 text-white font-extrabold text-base shadow-lg transform hover:scale-105 transition-all">
+                            ▶ BẮT ĐẦU CHƠI
+                        </button>
+                    </div>
+
+                    <!-- Game Over Overlay -->
+                    <div id="gameOverOverlay" class="hidden absolute inset-0 bg-slate-900/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6 z-20">
+                        <span class="text-6xl mb-2">🎉</span>
+                        <h4 class="text-2xl font-black text-amber-300 mb-1">XUẤT SẮC CÔNG THỦ!</h4>
+                        <p class="text-sm text-gray-300 mb-4">Bạn đã thu thập được thêm <span id="finalGameStars" class="text-amber-400 font-extrabold text-lg">+0</span> Sao Băng!</p>
+                        <button onclick="startGame()" class="px-6 py-3 rounded-2xl bg-pastel-yellow hover:bg-amber-300 text-amber-950 font-extrabold text-sm transition-all shadow-md">
+                            🔄 Chơi Lại Lần Nữa
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Game Instructions -->
+                <div class="mt-4 flex items-center justify-between text-xs text-gray-500 font-bold px-2">
+                    <span>💡 Mẹo: Giữ tinh mắt và phản ứng nhanh để đạt điểm tối đa!</span>
+                    <span class="hidden sm:inline">Âm thanh sinh động & Hiệu ứng lấp lánh</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: BẢNG VÀNG PHI HÀNH GIA (LEADERBOARD & BADGES) -->
+    <section id="leaderboard" class="py-12 px-4 relative z-10 mb-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left Column: Badges Collection -->
+                <div class="lg:col-span-6 glass-card rounded-3xl p-6 md:p-8 border-2 border-white shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-2xl bg-pastel-yellow flex items-center justify-center text-2xl shadow-sm">
+                                🎖️
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-black text-gray-800">Bộ Sưu Tập Huy Hiệu</h3>
+                                <p class="text-xs text-gray-500 font-bold">Mở khóa huy hiệu khi đạt mốc điểm Sao Băng</p>
+                            </div>
+                        </div>
+
+                        <!-- Badges List -->
+                        <div class="grid grid-cols-3 gap-4">
+                            <!-- Badge 1 -->
+                            <div class="bg-white/80 p-4 rounded-2xl border-2 border-pastel-mint text-center shadow-sm flex flex-col items-center">
+                                <div class="w-14 h-14 rounded-full bg-pastel-mint/50 flex items-center justify-center text-3xl mb-2">
+                                    👨‍🚀
+                                </div>
+                                <span class="text-xs font-black text-gray-800">Tập Sự Vũ Trụ</span>
+                                <span class="text-[10px] text-emerald-600 font-bold mt-1">Đã Đạt (0 Sao)</span>
+                            </div>
+
+                            <!-- Badge 2 -->
+                            <div id="badgeResearcher" class="bg-white/40 p-4 rounded-2xl border-2 border-gray-200 text-center shadow-sm flex flex-col items-center opacity-60 transition-all">
+                                <div class="w-14 h-14 rounded-full bg-pastel-purple/50 flex items-center justify-center text-3xl mb-2">
+                                    🔬
+                                </div>
+                                <span class="text-xs font-black text-gray-800">Nhà Nghiên Cứu</span>
+                                <span class="text-[10px] text-purple-600 font-bold mt-1">Cần 150 Sao</span>
+                            </div>
+
+                            <!-- Badge 3 -->
+                            <div id="badgeCaptain" class="bg-white/40 p-4 rounded-2xl border-2 border-gray-200 text-center shadow-sm flex flex-col items-center opacity-60 transition-all">
+                                <div class="w-14 h-14 rounded-full bg-pastel-yellow/50 flex items-center justify-center text-3xl mb-2">
+                                    👑
+                                </div>
+                                <span class="text-xs font-black text-gray-800">Thuyền Trưởng</span>
+                                <span class="text-[10px] text-amber-600 font-bold mt-1">Cần 300 Sao</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 rounded-2xl bg-pastel-purple/30 border border-pastel-purple/50 flex items-center gap-3">
+                        <span class="text-2xl">💡</span>
+                        <p class="text-xs text-purple-900 font-bold">Hãy tích cực giải bài tập và tham gia mini-game mỗi ngày để nâng cấp danh hiệu Thuyền Trưởng nhé!</p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Leaderboard Top Astronauts -->
+                <div class="lg:col-span-6 glass-card rounded-3xl p-6 md:p-8 border-2 border-white shadow-lg">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-pastel-pink flex items-center justify-center text-2xl shadow-sm">
+                                🏆
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-black text-gray-800">BẢNG VÀNG PHI HÀNH GIA</h3>
+                                <p class="text-xs text-gray-500 font-bold">Top các bạn nhỏ xuất sắc nhất tuần này</p>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-black bg-pastel-pink text-pink-800">Tuần 42</span>
+                    </div>
+
+                    <!-- Top List -->
+                    <div class="space-y-3">
+                        <!-- Top 1 -->
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-amber-100/80 to-white border border-amber-200 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-amber-400 text-white font-black text-sm flex items-center justify-center shadow-sm">1</span>
+                                <div class="w-10 h-10 rounded-full bg-pastel-yellow flex items-center justify-center text-xl">👧</div>
+                                <div>
+                                    <div class="text-sm font-black text-gray-800">Bảo An (Lớp 3A)</div>
+                                    <div class="text-[10px] font-bold text-amber-700">Thuyền Trưởng Vũ Trụ</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm font-black text-amber-600 flex items-center gap-1">450 <span class="text-xs">🌠</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Top 2 -->
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-slate-100/80 to-white border border-slate-200 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-slate-300 text-slate-700 font-black text-sm flex items-center justify-center shadow-sm">2</span>
+                                <div class="w-10 h-10 rounded-full bg-pastel-blue flex items-center justify-center text-xl">👦</div>
+                                <div>
+                                    <div class="text-sm font-black text-gray-800">Minh Khôi (Lớp 4B)</div>
+                                    <div class="text-[10px] font-bold text-blue-700">Nhà Nghiên Cứu</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm font-black text-blue-600 flex items-center gap-1">380 <span class="text-xs">🌠</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Top 3 -->
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-orange-100/80 to-white border border-orange-200 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-amber-600 text-white font-black text-sm flex items-center justify-center shadow-sm">3</span>
+                                <div class="w-10 h-10 rounded-full bg-pastel-pink flex items-center justify-center text-xl">👧</div>
+                                <div>
+                                    <div class="text-sm font-black text-gray-800">Tuệ Nhi (Lớp 2C)</div>
+                                    <div class="text-[10px] font-bold text-pink-700">Nhà Nghiên Cứu</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm font-black text-pink-600 flex items-center gap-1">310 <span class="text-xs">🌠</span></span>
+                            </div>
+                        </div>
+
+                        <!-- User Current Rank -->
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-pastel-purple/40 border border-purple-300 mt-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-purple-500 text-white font-black text-sm flex items-center justify-center">8</span>
+                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xl">👨‍🚀</div>
+                                <div>
+                                    <div class="text-sm font-black text-purple-900">Bạn (Phi Hành Gia Nhí)</div>
+                                    <div id="userRankSubtitle" class="text-[10px] font-bold text-purple-700">Phi Hành Gia Tập Sự</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span id="userLeaderboardStars" class="text-sm font-black text-purple-700 flex items-center gap-1">120 <span class="text-xs">🌠</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-white/80 border-t border-purple-100 py-8 px-4 mt-auto relative z-10 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">🪐</span>
+                <div>
+                    <h4 class="font-black text-gray-800 text-sm">VŨ TRỤ HỌC TẬP</h4>
+                    <p class="text-xs text-gray-500">Nền tảng học tập pastel thông minh cho học sinh tiểu học</p>
+                </div>
+            </div>
+            <p class="text-xs font-bold text-gray-400">
+                © 2026 Learning Universe. Thiết kế với 💜 Pastel Dịu Mát.
+            </p>
+        </div>
+    </footer>
+
+    <!-- QUIZ MODAL (BÀI TẬP TRẮC NGHIỆM TƯƠNG TÁC) -->
+    <div id="quizModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border-2 border-white relative animate-pulse-glow">
+            <!-- Close Button -->
+            <button onclick="closeQuizModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="flex items-center gap-3 mb-4">
+                <span id="quizIcon" class="text-3xl">📐</span>
+                <div>
+                    <h3 id="quizTitle" class="text-xl font-black text-gray-800">Bài Tập Vũ Trụ</h3>
+                    <p id="quizSubject" class="text-xs font-bold text-purple-600 uppercase">Môn Học</p>
+                </div>
+            </div>
+
+            <!-- Quiz Content -->
+            <div id="quizBody" class="py-2">
+                <div class="bg-pastel-bg p-4 rounded-2xl mb-4 border border-gray-100">
+                    <p id="quizQuestion" class="text-base font-bold text-gray-800">Câu hỏi trắc nghiệm sẽ xuất hiện ở đây?</p>
+                </div>
+
+                <div id="quizOptions" class="space-y-2.5">
+                    <!-- Options inserted dynamically -->
+                </div>
+            </div>
+
+            <!-- Quiz Result Message -->
+            <div id="quizResult" class="hidden mt-4 p-3 rounded-2xl text-center font-bold text-sm"></div>
+
+            <!-- Modal Footer -->
+            <div class="mt-6 flex justify-end gap-2">
+                <button onclick="closeQuizModal()" class="px-5 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-extrabold text-sm transition-colors">
+                    Đóng
+                </button>
+            </div>
+        </div>
     </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Global User State
+        let userStars = 120;
+        let currentQuizData = null;
+
+        // Quizzes Database
+        const quizzes = {
+            math: {
+                title: "Bảng Cửu Chương Vũ Trụ",
+                subject: "Toán Học (Sao Hỏa)",
+                icon: "🔢",
+                question: "🚀 Phi thuyền cần nhiên liệu! Tính giá trị phép tính: 7 x 8 = ?",
+                options: [
+                    { text: "A. 54", correct: false },
+                    { text: "B. 56", correct: true },
+                    { text: "C. 64", correct: false },
+                    { text: "D. 48", correct: false }
+                ],
+                reward: 20
+            },
+            vietnamese: {
+                title: "Giải Mã Tên Các Chòm Sao",
+                subject: "Tiếng Việt (Sao Kim)",
+                icon: "📚",
+                question: "Từ nào sau đây viết ĐÚNG chính tả tiếng Việt?",
+                options: [
+                    { text: "A. Xinh xắn", correct: true },
+                    { text: "B. Sinh xắn", correct: false },
+                    { text: "C. Xinh sắn", correct: false },
+                    { text: "D. Sinh sắn", correct: false }
+                ],
+                reward: 15
+            },
+            science: {
+                title: "Bí Uẩn Hệ Mặt Trời",
+                subject: "Khoa Học (Sao Mộc)",
+                icon: "🪐",
+                question: "Hành tinh nào gần Mặt Trời nhất trong Hệ Mặt Trời?",
+                options: [
+                    { text: "A. Trái Đất", correct: false },
+                    { text: "B. Sao Hỏa", correct: false },
+                    { text: "C. Sao Thủy (Mercury)", correct: true },
+                    { text: "D. Sao Mộc", correct: false }
+                ],
+                reward: 25
+            },
+            english: {
+                title: "Space Vocabulary",
+                subject: "Tiếng Anh (Sao Thủy)",
+                icon: "🚀",
+                question: "Từ 'Astronaut' trong Tiếng Anh có nghĩa là gì?",
+                options: [
+                    { text: "A. Tàu vũ trụ", correct: false },
+                    { text: "B. Ngôi sao", correct: false },
+                    { text: "C. Phi hành gia", correct: true },
+                    { text: "D. Mặt trăng", correct: false }
+                ],
+                reward: 20
+            }
+        };
+
+        // --- BACKGROUND CANVAS ANIMATION (STARS & TWINKLE) ---
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            const count = Math.floor(window.innerWidth / 15);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 0.5,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.02 + 0.005,
+                    color: ['#E2D4F9', '#D1F2EB', '#FDE2E4', '#D0E1FD', '#FFF1C5'][Math.floor(Math.random() * 5)]
+                });
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(s => {
+                s.alpha += s.speed;
+                if (s.alpha > 1 || s.alpha < 0) s.speed = -s.speed;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = s.color;
+                ctx.globalAlpha = Math.abs(s.alpha);
+                ctx.fill();
+            });
+            requestAnimationFrame(drawStars);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        drawStars();
+
+        // --- SUBJECT FILTER LOGIC ---
+        function filterSubject(subject) {
+            const buttons = document.querySelectorAll('#subjectFilter button');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-purple-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'text-gray-600');
+            });
+
+            event.currentTarget.classList.remove('bg-white', 'text-gray-600');
+            event.currentTarget.classList.add('bg-purple-600', 'text-white', 'shadow-md');
+
+            const cards = document.querySelectorAll('.exercise-card');
+            cards.forEach(card => {
+                if (subject === 'all' || card.classList.contains(subject)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // --- QUIZ MODAL LOGIC ---
+        function openQuizModal(type) {
+            currentQuizData = quizzes[type];
+            if (!currentQuizData) return;
+
+            document.getElementById('quizIcon').innerText = currentQuizData.icon;
+            document.getElementById('quizTitle').innerText = currentQuizData.title;
+            document.getElementById('quizSubject').innerText = currentQuizData.subject;
+            document.getElementById('quizQuestion').innerText = currentQuizData.question;
+
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+
+            currentQuizData.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full p-3.5 rounded-2xl bg-white hover:bg-pastel-purple/40 border border-gray-200 font-bold text-left text-sm text-gray-700 transition-all flex items-center justify-between group";
+                btn.innerHTML = `<span>${opt.text}</span> <i class="fa-regular fa-circle text-gray-300 group-hover:text-purple-500"></i>`;
+                btn.onclick = () => checkQuizAnswer(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('quizResult').className = "hidden mt-4 p-3 rounded-2xl text-center font-bold text-sm";
+            document.getElementById('quizModal').classList.remove('hidden');
+        }
+
+        function closeQuizModal() {
+            document.getElementById('quizModal').classList.add('hidden');
+        }
+
+        function checkQuizAnswer(selectedOption, btnElement) {
+            const resultDiv = document.getElementById('quizResult');
+            const allBtns = document.querySelectorAll('#quizOptions button');
+            allBtns.forEach(b => b.disabled = true);
+
+            if (selectedOption.correct) {
+                btnElement.classList.remove('bg-white', 'border-gray-200');
+                btnElement.classList.add('bg-emerald-100', 'border-emerald-400', 'text-emerald-900');
+                
+                resultDiv.innerText = `🎉 CHÍNH XÁC! Bạn được cộng +${currentQuizData.reward} Sao Băng!`;
+                resultDiv.className = "mt-4 p-3 rounded-2xl text-center font-bold text-sm bg-emerald-100 text-emerald-800 border border-emerald-300 block";
+
+                // Add stars
+                addStars(currentQuizData.reward);
+                
+                // Trigger Confetti
+                confetti({
+                    particleCount: 60,
+                    spread: 60,
+                    origin: { y: 0.6 }
+                });
+            } else {
+                btnElement.classList.remove('bg-white', 'border-gray-200');
+                btnElement.classList.add('bg-rose-100', 'border-rose-400', 'text-rose-900');
+
+                resultDiv.innerText = "❌ Chưa chính xác rồi, thử lại ở lần sau nhé!";
+                resultDiv.className = "mt-4 p-3 rounded-2xl text-center font-bold text-sm bg-rose-100 text-rose-800 border border-rose-300 block";
+            }
+        }
+
+        // --- STARS & BADGES REWARD SYSTEM ---
+        function addStars(amount) {
+            userStars += amount;
+            document.getElementById('starCount').innerText = userStars;
+            document.getElementById('userLeaderboardStars').innerHTML = `${userStars} <span class="text-xs">🌠</span>`;
+
+            // Check badges
+            if (userStars >= 300) {
+                document.getElementById('userRankTitle').innerText = "Thuyền Trưởng";
+                document.getElementById('userRankSubtitle').innerText = "Thuyền Trưởng Vũ Trụ";
+                document.getElementById('badgeCaptain').classList.remove('opacity-60', 'bg-white/40');
+                document.getElementById('badgeCaptain').classList.add('bg-white/90', 'border-amber-400');
+            } else if (userStars >= 150) {
+                document.getElementById('userRankTitle').innerText = "Nghiên Cứu";
+                document.getElementById('userRankSubtitle').innerText = "Nhà Nghiên Cứu";
+                document.getElementById('badgeResearcher').classList.remove('opacity-60', 'bg-white/40');
+                document.getElementById('badgeResearcher').classList.add('bg-white/90', 'border-purple-400');
+            }
+        }
+
+        // --- MINI GAME: BẮN THIÊN THẠCH ĐÁP ÁN ĐÚNG ---
+        const gCanvas = document.getElementById('gameCanvas');
+        const gCtx = gCanvas.getContext('2d');
+        let gameActive = false;
+        let gameScore = 0;
+        let gameTime = 30;
+        let gameTimerInterval = null;
+        let asteroids = [];
+        let currentProblem = { q: "5 + 3 = ?", answer: 8 };
+
+        function resizeGameCanvas() {
+            const container = document.getElementById('gameContainer');
+            gCanvas.width = container.clientWidth;
+            gCanvas.height = container.clientHeight;
+        }
+
+        window.addEventListener('resize', resizeGameCanvas);
+
+        function generateProblem() {
+            const a = Math.floor(Math.random() * 10) + 1;
+            const b = Math.floor(Math.random() * 10) + 1;
+            currentProblem = {
+                q: `${a} + ${b} = ?`,
+                answer: a + b
+            };
+        }
+
+        function spawnAsteroid() {
+            if (!gameActive) return;
+            const radius = 32;
+            const x = Math.random() * (gCanvas.width - radius * 2) + radius;
+            
+            // Randomly pick if correct or wrong answer
+            const isCorrect = Math.random() < 0.4 && !asteroids.some(a => a.val === currentProblem.answer);
+            let val = currentProblem.answer;
+            if (!isCorrect) {
+                val = currentProblem.answer + (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 3) + 1);
+                if (val < 0) val = 0;
+            }
+
+            asteroids.push({
+                x: x,
+                y: -radius,
+                radius: radius,
+                speed: Math.random() * 1.2 + 0.8,
+                val: val,
+                color: '#B8A1E3'
+            });
+        }
+
+        function startGame() {
+            resizeGameCanvas();
+            gameScore = 0;
+            gameTime = 30;
+            asteroids = [];
+            gameActive = true;
+
+            document.getElementById('gameScore').innerText = gameScore;
+            document.getElementById('gameTimer').innerText = gameTime + 's';
+            document.getElementById('gameStartOverlay').classList.add('hidden');
+            document.getElementById('gameOverOverlay').classList.add('hidden');
+
+            generateProblem();
+
+            clearInterval(gameTimerInterval);
+            gameTimerInterval = setInterval(() => {
+                gameTime--;
+                document.getElementById('gameTimer').innerText = gameTime + 's';
+                if (gameTime <= 0) {
+                    endGame();
+                }
+            }, 1000);
+
+            requestAnimationFrame(updateGame);
+        }
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(gameTimerInterval);
+            const rewardStars = Math.floor(gameScore / 2);
+            document.getElementById('finalGameStars').innerText = `+${rewardStars}`;
+            document.getElementById('gameOverOverlay').classList.remove('hidden');
+            addStars(rewardStars);
+        }
+
+        function updateGame() {
+            if (!gameActive) return;
+
+            gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+
+            // Draw Problem Banner at top
+            gCtx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            gCtx.roundRect(gCanvas.width / 2 - 100, 15, 200, 45, 15);
+            gCtx.fill();
+            gCtx.fillStyle = '#4A4A68';
+            gCtx.font = 'bold 18px Nunito';
+            gCtx.textAlign = 'center';
+            gCtx.fillText(`Tìm: ${currentProblem.q}`, gCanvas.width / 2, 43);
+
+            // Spawn logic
+            if (Math.random() < 0.03 && asteroids.length < 5) {
+                spawnAsteroid();
+            }
+
+            // Draw & Move Asteroids
+            for (let i = asteroids.length - 1; i >= 0; i--) {
+                let a = asteroids[i];
+                a.y += a.speed;
+
+                // Draw Asteroid Circle
+                gCtx.beginPath();
+                gCtx.arc(a.x, a.y, a.radius, 0, Math.PI * 2);
+                gCtx.fillStyle = '#E2D4F9';
+                gCtx.fill();
+                gCtx.lineWidth = 3;
+                gCtx.strokeStyle = '#B8A1E3';
+                gCtx.stroke();
+
+                // Draw Text
+                gCtx.fillStyle = '#4A4A68';
+                gCtx.font = 'black 20px Nunito';
+                gCtx.textAlign = 'center';
+                gCtx.textBaseline = 'middle';
+                gCtx.fillText(a.val, a.x, a.y);
+
+                // Remove if out of screen
+                if (a.y > gCanvas.height + a.radius) {
+                    asteroids.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(updateGame);
+        }
+
+        // Canvas Click Handler
+        gCanvas.addEventListener('click', (e) => {
+            if (!gameActive) return;
+
+            const rect = gCanvas.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+
+            for (let i = asteroids.length - 1; i >= 0; i--) {
+                let a = asteroids[i];
+                const dist = Math.hypot(clickX - a.x, clickY - a.y);
+                if (dist < a.radius + 10) {
+                    if (a.val === currentProblem.answer) {
+                        gameScore += 10;
+                        document.getElementById('gameScore').innerText = gameScore;
+                        generateProblem(); // Next Question
+                    } else {
+                        gameScore = Math.max(0, gameScore - 5);
+                        document.getElementById('gameScore').innerText = gameScore;
+                    }
+                    asteroids.splice(i, 1);
+                    break;
+                }
+            }
+        });
+
+        // Initialize view on load
+        window.onload = function() {
+            resizeGameCanvas();
+        };
+    </script>
 </body>
 </html>
