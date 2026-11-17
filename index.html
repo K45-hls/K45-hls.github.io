@@ -1,178 +1,932 @@
+
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đại Dương Tri Thức - Ocean of Knowledge</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Canvas Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đại Dương Tri Thức - Khám phá và chinh phục</title>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Nunito', 'Quicksand', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #fbcfe8 0%, #e9d5ff 50%, #c7d2fe 100%);
-            color: #3b0764;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            border: 2px solid rgba(255, 255, 255, 1);
-            box-shadow: 0 20px 35px -10px rgba(126, 34, 206, 0.15);
-        }
-        .hero-globe {
-            background: radial-gradient(circle at 30% 30%, #f472b6, #db2777, #9333ea);
-            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.3), 0 25px 50px -12px rgba(219, 39, 119, 0.4);
-        }
-    </style>
+<style>
+:root {
+    --cyan:#08bfd0;
+    --blue:#087fae;
+    --deep:#075477;
+    --light:#e8fafc;
+    --lavender:#b8a9f5;
+    --pink:#ffb8d2;
+    --text:#24485a;
+}
+
+* { box-sizing:border-box; }
+
+body {
+    margin:0;
+    font-family:'Nunito',sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at 10% 15%,#d9f8fc 0,transparent 30%),
+      radial-gradient(circle at 90% 45%,#d9f2ff 0,transparent 30%),
+      linear-gradient(180deg,#e8fafc,#d1f2f8 55%,#effcff);
+    overflow-x:hidden;
+}
+
+h1,h2,h3,.brand-font { font-family:'Fredoka',sans-serif; }
+
+.glass {
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(16px);
+    border:2px solid rgba(255,255,255,.95);
+    box-shadow:0 12px 30px rgba(8,127,174,.12);
+}
+
+.ocean-button {
+    background:linear-gradient(135deg,#08bfd0,#087fae);
+    color:white;
+    border-radius:17px;
+    box-shadow:0 6px 0 #06658a,0 12px 22px rgba(8,127,174,.18);
+    transition:.2s;
+}
+
+.ocean-button:hover {
+    transform:translateY(-3px);
+    box-shadow:0 9px 0 #06658a,0 15px 25px rgba(8,127,174,.2);
+}
+
+.white-button {
+    background:white;
+    border:2px solid #c5edf3;
+    color:#087fae;
+    border-radius:16px;
+    transition:.2s;
+}
+
+.white-button:hover { background:#e5faff; }
+
+.ocean-card {
+    background:linear-gradient(145deg,#fff,#f0fcfd);
+    border:2px solid white;
+    border-radius:25px;
+    box-shadow:0 12px 28px rgba(8,127,174,.12);
+    transition:.25s;
+}
+
+.ocean-card:hover {
+    transform:translateY(-6px);
+    box-shadow:0 20px 35px rgba(8,127,174,.19);
+}
+
+.hero-bg {
+    background:linear-gradient(135deg,#54d9e6,#45b8e4 55%,#498cce);
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-bg:before,.hero-bg:after {
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+}
+
+.hero-bg:before { top:-150px;left:-60px; }
+.hero-bg:after { bottom:-190px;right:-40px; }
+
+.bubble {
+    position:absolute;
+    border:2px solid rgba(255,255,255,.65);
+    background:rgba(255,255,255,.22);
+    border-radius:50%;
+    animation:float 6s ease-in-out infinite;
+    pointer-events:none;
+}
+
+@keyframes float {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-22px); }
+}
+
+.fish {
+    animation:swim 4s ease-in-out infinite;
+}
+
+@keyframes swim {
+    0%,100% { transform:translateX(0) rotate(-4deg); }
+    50% { transform:translateX(12px) rotate(4deg); }
+}
+
+.wave {
+    position:absolute;
+    bottom:-2px;
+    left:0;
+    width:100%;
+    height:55px;
+    background:rgba(255,255,255,.28);
+    border-radius:50% 50% 0 0;
+}
+
+.nav-link {
+    padding:10px 15px;
+    border-radius:14px;
+    font-weight:900;
+    color:#17617e;
+    white-space:nowrap;
+}
+
+.nav-link:hover { background:#e3f9fc; }
+
+.section-label {
+    display:inline-block;
+    padding:7px 16px;
+    border-radius:30px;
+    background:#d5f5f8;
+    color:#087fae;
+    font-weight:900;
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+.modal {
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(3,43,65,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+    overflow-y:auto;
+}
+
+.modal.active { display:flex; }
+
+.modal-box {
+    background:white;
+    width:100%;
+    max-width:650px;
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:28px;
+    padding:25px;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+input,select,textarea {
+    width:100%;
+    border:2px solid #d5edf2;
+    border-radius:13px;
+    padding:12px;
+    outline:none;
+    font-family:'Nunito',sans-serif;
+    color:#24485a;
+}
+
+input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
+
+.game-option {
+    border:2px solid #d8edf2;
+    border-radius:15px;
+    padding:14px;
+    cursor:pointer;
+    transition:.2s;
+    font-weight:800;
+    background:white;
+}
+
+.game-option:hover { background:#eafaff; border-color:#08bfd0; }
+.game-option.correct { background:#d5f8e7;border-color:#27b777;color:#087b50; }
+.game-option.wrong { background:#ffe2e8;border-color:#ed7991;color:#b83254; }
+
+.tag {
+    display:inline-block;
+    background:#e5f8fb;
+    color:#087fae;
+    padding:5px 11px;
+    border-radius:30px;
+    font-size:11px;
+    font-weight:900;
+}
+
+.hidden-section { display:none; }
+
+@media(max-width:768px) {
+    .desktop-nav { display:none; }
+    .hero-title { font-size:36px!important; }
+}
+</style>
 </head>
-<body class="min-h-screen flex flex-col relative">
 
-    <!-- HEADER / NAVBAR -->
-    <header class="sticky top-0 z-40 px-4 py-4">
-        <div class="max-w-7xl mx-auto glass-card rounded-3xl px-6 py-3 flex items-center justify-between border-2 border-white shadow-lg">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-500 flex items-center justify-center text-2xl text-white shadow-lg transform group-hover:rotate-12 transition-transform">
-                    🐬
-                </div>
-                <div>
-                    <span class="text-lg md:text-xl font-black text-purple-950 tracking-wide">
-                        ĐẠI DƯƠNG TRI THỨC
-                    </span>
-                    <span class="block text-[10px] uppercase tracking-widest text-pink-700 font-black">Ocean of Knowledge</span>
-                </div>
+<body>
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 px-3 py-3">
+<div class="max-w-7xl mx-auto glass rounded-3xl px-4 md:px-6 py-3 flex items-center justify-between gap-3">
+
+    <a href="#home" class="flex items-center gap-3 min-w-0">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-3xl shadow-lg">
+            🐳
+        </div>
+        <div class="min-w-0">
+            <div class="brand-font text-lg md:text-xl font-bold text-sky-900 leading-tight">
+                ĐẠI DƯƠNG TRI THỨC
+            </div>
+            <div class="text-[9px] md:text-[10px] font-black tracking-widest text-cyan-700">
+                OCEAN OF KNOWLEDGE
+            </div>
+        </div>
+    </a>
+
+    <nav class="desktop-nav flex items-center gap-1">
+        <a class="nav-link" href="#home">Trang chủ</a>
+        <a class="nav-link" href="#games">Kho trò chơi</a>
+        <a class="nav-link" href="#worlds">Môn học</a>
+        <a class="nav-link" href="#workshop">Sáng tạo</a>
+        <a class="nav-link" href="#community">Cộng đồng</a>
+    </nav>
+
+    <button onclick="openCreator()" class="ocean-button px-4 py-3 font-black text-sm whitespace-nowrap">
+        <i class="fa-solid fa-plus mr-1"></i>
+        <span class="hidden sm:inline">Tạo trò chơi</span>
+        <span class="sm:hidden">Tạo mới</span>
+    </button>
+</div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="px-4 pt-5 pb-12">
+<div class="max-w-7xl mx-auto hero-bg rounded-[35px] min-h-[420px] md:min-h-[460px] shadow-2xl p-7 md:p-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
+
+    <div class="relative z-10 text-center lg:text-left">
+        <div class="inline-flex bg-white/90 rounded-full px-5 py-2 text-xs md:text-sm font-black text-sky-800 mb-5 shadow">
+            🌊 CHÀO MỪNG ĐẾN VỚI THẾ GIỚI TRI THỨC
+        </div>
+
+        <h1 class="hero-title text-5xl md:text-6xl font-bold text-white leading-tight drop-shadow-lg">
+            KHÁM PHÁ<br>
+            ĐẠI DƯƠNG
+            <span class="block text-yellow-200">CHINH PHỤC TRI THỨC!</span>
+        </h1>
+
+        <p class="text-white text-base md:text-lg font-bold mt-5 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            Nơi thầy cô sáng tạo trò chơi, học sinh khám phá kiến thức và cùng nhau mở ra hàng ngàn điều kỳ thú!
+        </p>
+
+        <div class="flex flex-wrap gap-4 justify-center lg:justify-start mt-7">
+            <a href="#games" class="bg-white text-sky-800 px-7 py-4 rounded-2xl font-black shadow-xl hover:-translate-y-1 transition">
+                <i class="fa-solid fa-compass mr-2"></i>Khám phá ngay
             </a>
+            <button onclick="openCreator()" class="bg-yellow-300 text-sky-950 px-7 py-4 rounded-2xl font-black shadow-xl hover:-translate-y-1 transition">
+                <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Thầy cô sáng tạo
+            </button>
+        </div>
 
-            <nav class="hidden md:flex items-center gap-2 bg-pink-100/70 p-1.5 rounded-2xl border border-pink-200">
-                <a href="#about" class="px-4 py-2 rounded-xl text-sm font-black text-purple-900 hover:text-pink-700 hover:bg-white transition-all">Khám Phá</a>
-                <a href="#worlds" class="px-4 py-2 rounded-xl text-sm font-black text-purple-900 hover:text-pink-700 hover:bg-white transition-all">4 Vùng Biển</a>
-                <a href="#games" class="px-4 py-2 rounded-xl text-sm font-black text-purple-900 hover:text-pink-700 hover:bg-white transition-all">Trò Chơi</a>
-                <a href="#teacher-library" class="px-4 py-2 rounded-xl text-sm font-black text-purple-900 hover:text-pink-700 hover:bg-white transition-all">Góc Giáo Viên</a>
-            </nav>
+        <div class="flex flex-wrap gap-5 justify-center lg:justify-start mt-7 text-white text-sm font-black">
+            <span>🎮 Kho trò chơi</span>
+            <span>🧑‍🏫 Cộng đồng giáo viên</span>
+            <span>✨ Chia sẻ tri thức</span>
+        </div>
+    </div>
 
-            <div class="flex items-center gap-3">
-                <div class="flex items-center gap-2 bg-amber-100 border-2 border-amber-300 px-4 py-2 rounded-2xl shadow-sm">
-                    <span class="text-xl animate-bounce">🐚</span>
-                    <div>
-                        <div class="text-[9px] font-black uppercase text-amber-900 leading-none">Ngọc Trai</div>
-                        <div id="starCount" class="text-sm font-black text-amber-950">120</div>
-                    </div>
-                </div>
+    <div class="relative z-10 flex justify-center items-center min-h-[270px]">
+        <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-white/20 rounded-full blur-xl"></div>
+
+        <div class="relative text-center">
+            <div class="text-9xl md:text-[150px] fish drop-shadow-2xl">🐳</div>
+            <div class="absolute -top-5 -right-10 text-5xl fish">🐬</div>
+            <div class="absolute top-20 -left-12 text-4xl">🐢</div>
+            <div class="absolute bottom-0 -right-12 text-4xl">🐙</div>
+            <div class="absolute -bottom-8 left-0 text-4xl">🐠</div>
+            <div class="bg-white/90 rounded-2xl px-5 py-3 shadow-xl mt-3">
+                <div class="font-black text-sky-900">Xin chào! Mình là Cá Voi Xanh</div>
+                <div class="text-xs font-bold text-cyan-700">Người bạn đồng hành của bạn 🫧</div>
             </div>
         </div>
-    </header>
+    </div>
 
-    <!-- BANNER HERO SECTION -->
-    <section id="about" class="relative pt-8 pb-16 px-4 z-10">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            <div class="lg:col-span-7 text-center lg:text-left space-y-6">
-                <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/95 border-2 border-pink-300 shadow-md text-xs md:text-sm font-black text-purple-900">
-                    <span class="text-base">🌊</span> Chào mừng học sinh và thầy cô đến với Đại Dương Tri Thức!
-                </div>
-                
-                <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-purple-950 leading-tight drop-shadow-sm">
-                    Mỗi ngày một khám phá – <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-700">Mỗi trò chơi một niềm vui</span> 🐬
-                </h1>
+    <div class="bubble w-12 h-12 top-10 right-20"></div>
+    <div class="bubble w-7 h-7 bottom-20 left-1/2"></div>
+    <div class="bubble w-16 h-16 top-1/2 left-5"></div>
+    <div class="wave"></div>
+</div>
+</section>
 
-                <p class="text-base md:text-lg text-purple-900 font-bold max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                    Khám phá thế giới đại dương hoàng hôn tím hồng sinh động cùng chú cá heo thân thiện <strong class="text-pink-700 bg-pink-100 px-2 py-0.5 rounded-lg">Bọt Biển</strong>. Vượt qua thử thách môn học, thu thập ngọc trai và chinh phục đại dương ngay hôm nay!
-                </p>
+<!-- QUICK STATS -->
+<section class="px-4 -mt-3 relative z-10">
+<div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div class="glass rounded-2xl p-4 text-center">
+        <div class="text-3xl">🎮</div>
+        <div class="text-2xl font-black text-sky-800" id="gameCount">3</div>
+        <div class="text-xs font-bold text-slate-500">Trò chơi</div>
+    </div>
+    <div class="glass rounded-2xl p-4 text-center">
+        <div class="text-3xl">📚</div>
+        <div class="text-2xl font-black text-sky-800">4</div>
+        <div class="text-xs font-bold text-slate-500">Vùng biển</div>
+    </div>
+    <div class="glass rounded-2xl p-4 text-center">
+        <div class="text-3xl">🧑‍🏫</div>
+        <div class="text-2xl font-black text-sky-800">∞</div>
+        <div class="text-xs font-bold text-slate-500">Giáo viên sáng tạo</div>
+    </div>
+    <div class="glass rounded-2xl p-4 text-center">
+        <div class="text-3xl">💎</div>
+        <div class="text-2xl font-black text-sky-800">100%</div>
+        <div class="text-xs font-bold text-slate-500">Niềm vui học tập</div>
+    </div>
+</div>
+</section>
 
-                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                    <a href="#worlds" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-black shadow-xl shadow-pink-300 transform hover:-translate-y-1 transition-all flex items-center gap-3 text-base">
-                        <i class="fa-solid fa-water text-xl"></i> Khám Phá Ngay
-                    </a>
-                    <a href="#teacher-library" class="px-8 py-4 rounded-2xl bg-white hover:bg-pink-50 text-purple-950 font-black border-2 border-pink-300 shadow-md transform hover:-translate-y-1 transition-all flex items-center gap-3 text-base">
-                        <i class="fa-solid fa-chalkboard-user text-xl text-pink-600"></i> Góc Giáo Viên
-                    </a>
-                </div>
+<!-- GAME LIBRARY -->
+<section id="games" class="py-16 px-4">
+<div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-9">
+        <span class="section-label">🎮 KHO BÁU TRI THỨC</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-sky-950 mt-3">KHO TRÒ CHƠI GIÁO DỤC</h2>
+        <p class="font-bold text-slate-500 mt-2">Chọn trò chơi và bắt đầu hành trình khám phá!</p>
+    </div>
+
+    <div class="glass rounded-3xl p-4 md:p-5 mb-7">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="md:col-span-2 relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-cyan-600"></i>
+                <input id="searchInput" class="pl-11" placeholder="Tìm tên trò chơi, kiến thức, tác giả...">
             </div>
-
-            <!-- Right Mascot Globe -->
-            <div class="lg:col-span-5 flex justify-center relative">
-                <div class="relative w-72 h-72 sm:w-88 sm:h-88 rounded-full hero-globe flex flex-col items-center justify-center text-center p-6 border-8 border-white/50 shadow-2xl">
-                    <div class="absolute -top-4 bg-white px-4 py-1.5 rounded-full shadow-lg text-xs font-black text-purple-950 border-2 border-pink-300">
-                        ✨ Linh vật Bọt Biển
-                    </div>
-                    <span class="text-7xl mb-2 animate-bounce">🐬</span>
-                    <h3 class="text-xl font-black text-white drop-shadow-md">Đại Dương Hoàng Hôn</h3>
-                    <p class="text-xs text-pink-100 font-bold mt-1">Nơi tri thức hội tụ</p>
-                </div>
-            </div>
-
+            <select id="subjectFilter">
+                <option value="">Tất cả môn học</option>
+                <option>Toán học</option>
+                <option>Tiếng Việt</option>
+                <option>Khoa học</option>
+                <option>Lịch sử & Địa lí</option>
+                <option>Tiếng Anh</option>
+                <option>Khác</option>
+            </select>
         </div>
-    </section>
 
-    <!-- 4 VÙNG BIỂN MÔN HỌC -->
-    <section id="worlds" class="py-12 px-4 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <div class="inline-block px-4 py-1.5 rounded-full bg-pink-200 text-pink-950 font-black text-xs uppercase tracking-wider mb-2 shadow-sm">
-                    🌊 Thế Giới Kỳ Thú
-                </div>
-                <h2 class="text-3xl md:text-4xl font-black text-purple-950">BỐN VÙNG BIỂN MÔN HỌC</h2>
-                <p class="text-purple-900 font-bold mt-2">Chọn vùng biển bạn muốn khám phá để bắt đầu thử thách!</p>
+        <div class="flex flex-wrap gap-2 mt-4">
+            <button class="tag cursor-pointer" onclick="filterType('')">Tất cả</button>
+            <button class="tag cursor-pointer" onclick="filterType('quiz')">Trắc nghiệm</button>
+            <button class="tag cursor-pointer" onclick="filterType('wheel')">Vòng quay</button>
+            <button class="tag cursor-pointer" onclick="filterType('match')">Ghép đôi</button>
+            <button class="tag cursor-pointer" onclick="filterType('favorite')">❤️ Yêu thích</button>
+        </div>
+    </div>
+
+    <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+    <div id="emptyGames" class="hidden text-center py-12">
+        <div class="text-6xl">🐚</div>
+        <h3 class="text-2xl font-bold text-sky-900 mt-3">Chưa tìm thấy trò chơi</h3>
+        <p class="text-slate-500 mt-2">Hãy thử từ khóa khác nhé!</p>
+    </div>
+
+</div>
+</section>
+
+<!-- SUBJECT WORLDS -->
+<section id="worlds" class="py-16 px-4 bg-white/50">
+<div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-10">
+        <span class="section-label">🌊 THẾ GIỚI KỲ THÚ</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-sky-950 mt-3">BỐN VÙNG BIỂN MÔN HỌC</h2>
+        <p class="font-bold text-slate-500 mt-2">Mỗi vùng biển là một hành trình khám phá mới!</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="ocean-card p-6 text-center">
+            <div class="text-6xl mb-4">🧮</div>
+            <h3 class="text-2xl font-bold text-sky-900">Đảo Toán Học</h3>
+            <p class="text-sm font-bold text-slate-500 mt-2">Phép tính, hình học và những thử thách tư duy.</p>
+            <button onclick="chooseSubject('Toán học')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
+        </div>
+
+        <div class="ocean-card p-6 text-center">
+            <div class="text-6xl mb-4">📚</div>
+            <h3 class="text-2xl font-bold text-sky-900">Vịnh Ngôn Ngữ</h3>
+            <p class="text-sm font-bold text-slate-500 mt-2">Từ vựng, đọc hiểu và thế giới văn học.</p>
+            <button onclick="chooseSubject('Tiếng Việt')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
+        </div>
+
+        <div class="ocean-card p-6 text-center">
+            <div class="text-6xl mb-4">🪸</div>
+            <h3 class="text-2xl font-bold text-sky-900">Rạn San Hô</h3>
+            <p class="text-sm font-bold text-slate-500 mt-2">Khoa học, tự nhiên và thế giới sinh vật.</p>
+            <button onclick="chooseSubject('Khoa học')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
+        </div>
+
+        <div class="ocean-card p-6 text-center">
+            <div class="text-6xl mb-4">🗺️</div>
+            <h3 class="text-2xl font-bold text-sky-900">Vùng Biển Khám Phá</h3>
+            <p class="text-sm font-bold text-slate-500 mt-2">Lịch sử, địa lí và hành trình quê hương.</p>
+            <button onclick="chooseSubject('Lịch sử & Địa lí')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
+        </div>
+
+    </div>
+</div>
+</section>
+
+<!-- WORKSHOP -->
+<section id="workshop" class="py-16 px-4">
+<div class="max-w-7xl mx-auto">
+    <div class="hero-bg rounded-[32px] p-7 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center shadow-xl">
+
+        <div class="text-center md:text-left">
+            <span class="bg-white/90 text-sky-800 px-4 py-2 rounded-full text-xs font-black">✨ DÀNH CHO GIÁO VIÊN</span>
+            <h2 class="text-4xl md:text-5xl font-bold text-white mt-5">XƯỞNG SÁNG TẠO</h2>
+            <p class="text-white font-bold mt-4 leading-relaxed">
+                Biến ý tưởng bài học thành trò chơi sinh động. Thầy cô có thể tự tạo, lưu và chia sẻ những trò chơi của mình!
+            </p>
+            <button onclick="openCreator()" class="bg-yellow-300 text-sky-950 px-7 py-4 rounded-2xl font-black mt-7 shadow-xl hover:-translate-y-1 transition">
+                <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Bắt đầu sáng tạo
+            </button>
+        </div>
+
+        <div class="flex justify-center gap-4 flex-wrap">
+            <div class="bg-white rounded-3xl p-5 text-center shadow-xl w-36 rotate-[-5deg]">
+                <div class="text-5xl">📝</div>
+                <div class="font-black text-sky-900 mt-3">Trắc nghiệm</div>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-card rounded-3xl p-6 border-2 border-pink-300 hover:shadow-2xl transition-all hover:-translate-y-2">
-                    <div class="w-14 h-14 rounded-2xl bg-pink-200 flex items-center justify-center text-3xl mb-4 shadow-inner">🧮</div>
-                    <h3 class="text-xl font-black text-purple-950 mb-2">Đảo Toán Học</h3>
-                    <p class="text-xs text-purple-900 font-bold mb-4">Khối số 3D, kho báu phép tính và mê cung toán học kỳ thú.</p>
-                    <a href="#games" class="inline-flex items-center gap-2 text-xs font-black text-pink-950 bg-pink-200 px-4 py-2 rounded-xl hover:bg-pink-300 transition-colors">Vào Đảo →</a>
-                </div>
-
-                <div class="glass-card rounded-3xl p-6 border-2 border-purple-300 hover:shadow-2xl transition-all hover:-translate-y-2">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-200 flex items-center justify-center text-3xl mb-4 shadow-inner">📚</div>
-                    <h3 class="text-xl font-black text-purple-950 mb-2">Vịnh Ngôn Ngữ</h3>
-                    <p class="text-xs text-purple-900 font-bold mb-4">Sách nổi, chữ cái sinh động, từ vựng và vùng biển đọc hiểu.</p>
-                    <a href="#games" class="inline-flex items-center gap-2 text-xs font-black text-purple-950 bg-purple-200 px-4 py-2 rounded-xl hover:bg-purple-300 transition-colors">Vào Vịnh →</a>
-                </div>
-
-                <div class="glass-card rounded-3xl p-6 border-2 border-indigo-300 hover:shadow-2xl transition-all hover:-translate-y-2">
-                    <div class="w-14 h-14 rounded-2xl bg-indigo-200 flex items-center justify-center text-3xl mb-4 shadow-inner">🔬</div>
-                    <h3 class="text-xl font-black text-purple-950 mb-2">Rạn San Hô</h3>
-                    <p class="text-xs text-purple-900 font-bold mb-4">Thế giới sinh vật biển, thí nghiệm và khám phá tự nhiên.</p>
-                    <a href="#games" class="inline-flex items-center gap-2 text-xs font-black text-indigo-950 bg-indigo-200 px-4 py-2 rounded-xl hover:bg-indigo-300 transition-colors">Khám Phá →</a>
-                </div>
-
-                <div class="glass-card rounded-3xl p-6 border-2 border-fuchsia-300 hover:shadow-2xl transition-all hover:-translate-y-2">
-                    <div class="w-14 h-14 rounded-2xl bg-fuchsia-200 flex items-center justify-center text-3xl mb-4 shadow-inner">🗺️</div>
-                    <h3 class="text-xl font-black text-purple-950 mb-2">Lịch Sử & Địa Lí</h3>
-                    <p class="text-xs text-purple-900 font-bold mb-4">Bản đồ kho báu, tàu khám phá và tìm hiểu quê hương.</p>
-                    <a href="#games" class="inline-flex items-center gap-2 text-xs font-black text-fuchsia-950 bg-fuchsia-200 px-4 py-2 rounded-xl hover:bg-fuchsia-300 transition-colors">Khởi Hành →</a>
-                </div>
+            <div class="bg-white rounded-3xl p-5 text-center shadow-xl w-36 rotate-[5deg]">
+                <div class="text-5xl">🎡</div>
+                <div class="font-black text-sky-900 mt-3">Vòng quay</div>
+            </div>
+            <div class="bg-white rounded-3xl p-5 text-center shadow-xl w-36 rotate-[-3deg]">
+                <div class="text-5xl">🧩</div>
+                <div class="font-black text-sky-900 mt-3">Ghép đôi</div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
+</section>
 
-    <!-- FOOTER -->
-    <footer class="mt-auto py-8 px-4 border-t border-pink-300 bg-white/90 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto text-center text-xs text-purple-950 font-black">
-            🌊 ĐẠI DƯƠNG TRI THỨC – Một đại dương, ngàn khám phá! ✨ © 2026 Ocean of Knowledge.
+<!-- COMMUNITY -->
+<section id="community" class="py-16 px-4 bg-white/50">
+<div class="max-w-7xl mx-auto">
+    <div class="text-center mb-9">
+        <span class="section-label">🧑‍🏫 KẾT NỐI VÀ CHIA SẺ</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-sky-950 mt-3">CỘNG ĐỒNG GIÁO VIÊN</h2>
+        <p class="font-bold text-slate-500 mt-2">Mỗi ý tưởng là một viên ngọc quý của đại dương tri thức.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="ocean-card p-7 text-center">
+            <div class="text-5xl">🌟</div>
+            <h3 class="text-xl font-bold mt-3 text-sky-900">Chia sẻ sáng tạo</h3>
+            <p class="text-sm text-slate-500 font-bold mt-2">Cùng chia sẻ trò chơi và ý tưởng dạy học.</p>
         </div>
-    </footer>
+        <div class="ocean-card p-7 text-center">
+            <div class="text-5xl">💎</div>
+            <h3 class="text-xl font-bold mt-3 text-sky-900">Kho báu chung</h3>
+            <p class="text-sm text-slate-500 font-bold mt-2">Khám phá những sản phẩm giáo dục hữu ích.</p>
+        </div>
+        <div class="ocean-card p-7 text-center">
+            <div class="text-5xl">🤝</div>
+            <h3 class="text-xl font-bold mt-3 text-sky-900">Cùng phát triển</h3>
+            <p class="text-sm text-slate-500 font-bold mt-2">Sao chép trò chơi và phát triển ý tưởng riêng.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- RESOURCE LIBRARY -->
+<section class="py-14 px-4">
+<div class="max-w-7xl mx-auto glass rounded-[30px] p-7 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div>
+        <span class="section-label">📚 GÓC TÀI NGUYÊN</span>
+        <h2 class="text-3xl font-bold text-sky-950 mt-3">THƯ VIỆN HỌC LIỆU</h2>
+        <p class="font-bold text-slate-500 mt-2">Nơi lưu giữ những tài liệu, hình ảnh và ý tưởng dạy học hữu ích.</p>
+    </div>
+    <div class="text-7xl">📖🪸</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-sky-950 text-white px-5 py-10">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div>
+        <div class="brand-font text-2xl font-bold">🐳 ĐẠI DƯƠNG TRI THỨC</div>
+        <p class="text-sky-200 text-sm font-bold mt-3">Khám phá đại dương – Chinh phục tri thức!</p>
+    </div>
+    <div>
+        <h3 class="font-black text-lg mb-3">Khám phá</h3>
+        <div class="text-sm text-sky-200 space-y-2">
+            <p><a href="#games">Kho trò chơi</a></p>
+            <p><a href="#worlds">Các môn học</a></p>
+            <p><a href="#workshop">Xưởng sáng tạo</a></p>
+        </div>
+    </div>
+    <div>
+        <h3 class="font-black text-lg mb-3">Thông điệp</h3>
+        <p class="text-sm text-sky-200">Một đại dương – Ngàn khám phá – Vạn niềm vui học tập!</p>
+    </div>
+</div>
+<div class="text-center text-xs text-sky-300 mt-9 border-t border-sky-800 pt-5">
+    © 2026 Đại Dương Tri Thức. Cùng nhau lan tỏa tri thức.
+</div>
+</footer>
+
+<!-- CREATE GAME MODAL -->
+<div id="creatorModal" class="modal">
+<div class="modal-box">
+    <div class="flex justify-between items-center mb-5">
+        <div>
+            <span class="section-label">✨ XƯỞNG SÁNG TẠO</span>
+            <h2 class="text-2xl font-bold text-sky-950 mt-2">Tạo trò chơi mới</h2>
+        </div>
+        <button onclick="closeModal('creatorModal')" class="text-2xl text-slate-400">✕</button>
+    </div>
+
+    <form id="createForm" class="space-y-4">
+        <div>
+            <label class="font-black text-sm">Tên trò chơi</label>
+            <input id="newTitle" required placeholder="Ví dụ: Thử tài Toán học">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+                <label class="font-black text-sm">Môn học</label>
+                <select id="newSubject">
+                    <option>Toán học</option>
+                    <option>Tiếng Việt</option>
+                    <option>Khoa học</option>
+                    <option>Lịch sử & Địa lí</option>
+                    <option>Tiếng Anh</option>
+                    <option>Khác</option>
+                </select>
+            </div>
+            <div>
+                <label class="font-black text-sm">Khối lớp</label>
+                <select id="newGrade">
+                    <option>Lớp 1</option>
+                    <option>Lớp 2</option>
+                    <option>Lớp 3</option>
+                    <option>Lớp 4</option>
+                    <option>Lớp 5</option>
+                    <option>Lớp 6–9</option>
+                    <option>Lớp 10–12</option>
+                    <option>Nhiều khối lớp</option>
+                </select>
+            </div>
+        </div>
+
+        <div>
+            <label class="font-black text-sm">Loại trò chơi</label>
+            <select id="newType">
+                <option value="quiz">Trắc nghiệm</option>
+                <option value="wheel">Vòng quay may mắn</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="font-black text-sm">Mô tả</label>
+            <textarea id="newDescription" rows="2" placeholder="Giới thiệu ngắn về trò chơi..."></textarea>
+        </div>
+
+        <div id="questionBuilder">
+            <label class="font-black text-sm">Câu hỏi 1</label>
+            <input id="questionText" required placeholder="Nhập nội dung câu hỏi">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                <input id="optionA" required placeholder="Đáp án A">
+                <input id="optionB" required placeholder="Đáp án B">
+                <input id="optionC" required placeholder="Đáp án C">
+                <input id="optionD" required placeholder="Đáp án D">
+            </div>
+            <label class="font-black text-sm block mt-3">Đáp án đúng</label>
+            <select id="correctAnswer">
+                <option value="0">A</option>
+                <option value="1">B</option>
+                <option value="2">C</option>
+                <option value="3">D</option>
+            </select>
+        </div>
+
+        <p class="text-xs text-slate-500">Phiên bản thử nghiệm: mỗi trò chơi trắc nghiệm có một câu hỏi. Có thể bổ sung nhiều câu hỏi trong phiên bản tiếp theo.</p>
+
+        <button type="submit" class="ocean-button w-full py-4 font-black">
+            <i class="fa-solid fa-floppy-disk mr-2"></i>Lưu trò chơi
+        </button>
+    </form>
+</div>
+</div>
+
+<!-- PLAY MODAL -->
+<div id="playModal" class="modal">
+<div class="modal-box">
+    <div class="flex justify-between items-center">
+        <span class="section-label">🎮 THỬ THÁCH TRI THỨC</span>
+        <button onclick="closeModal('playModal')" class="text-2xl text-slate-400">✕</button>
+    </div>
+    <div id="playContent" class="mt-5"></div>
+</div>
+</div>
+
+<script>
+// ========================================
+// DỮ LIỆU TRÒ CHƠI MẪU
+// ========================================
+
+const sampleGames = [
+    {
+        id:'sample1',
+        title:'Thử tài Toán học',
+        subject:'Toán học',
+        grade:'Lớp 4',
+        type:'quiz',
+        description:'Cùng chinh phục những câu hỏi Toán học thú vị!',
+        icon:'🧮',
+        author:'Đại Dương Tri Thức',
+        plays:120,
+        question:'Kết quả của 25 × 4 là bao nhiêu?',
+        options:['80','90','100','120'],
+        correct:2
+    },
+    {
+        id:'sample2',
+        title:'Khám phá Tiếng Việt',
+        subject:'Tiếng Việt',
+        grade:'Lớp 4',
+        type:'quiz',
+        description:'Khám phá thế giới từ ngữ và câu văn.',
+        icon:'📚',
+        author:'Đại Dương Tri Thức',
+        plays:85,
+        question:'Từ nào sau đây là danh từ?',
+        options:['Chạy','Xinh đẹp','Học sinh','Nhanh chóng'],
+        correct:2
+    },
+    {
+        id:'sample3',
+        title:'Nhà thám hiểm đại dương',
+        subject:'Khoa học',
+        grade:'Lớp 4',
+        type:'quiz',
+        description:'Cùng tìm hiểu thế giới tự nhiên.',
+        icon:'🐠',
+        author:'Đại Dương Tri Thức',
+        plays:96,
+        question:'Động vật nào sau đây sống dưới nước?',
+        options:['Con mèo','Cá heo','Con gà','Con thỏ'],
+        correct:1
+    }
+];
+
+let games = [];
+let activeFilter = '';
+let currentGame = null;
+let favorites = JSON.parse(localStorage.getItem('oceanFavorites') || '[]');
+
+try {
+    const saved = JSON.parse(localStorage.getItem('oceanGames') || '[]');
+    games = [...sampleGames,...saved];
+} catch(e) {
+    games = [...sampleGames];
+}
+
+// ========================================
+// HIỂN THỊ TRÒ CHƠI
+// ========================================
+
+function renderGames() {
+    const grid = document.getElementById('gameGrid');
+    const keyword = document.getElementById('searchInput').value.toLowerCase();
+    const subject = document.getElementById('subjectFilter').value;
+
+    let filtered = games.filter(game => {
+        const text = (game.title+' '+game.subject+' '+game.author+' '+game.description).toLowerCase();
+
+        const matchSearch = text.includes(keyword);
+        const matchSubject = !subject || game.subject === subject;
+        const matchType = !activeFilter ||
+            (activeFilter === 'favorite' ? favorites.includes(game.id) : game.type === activeFilter);
+
+        return matchSearch && matchSubject && matchType;
+    });
+
+    grid.innerHTML = '';
+
+    document.getElementById('emptyGames').classList.toggle('hidden',filtered.length > 0);
+    document.getElementById('gameCount').textContent = games.length;
+
+    filtered.forEach(game => {
+        const favorite = favorites.includes(game.id);
+
+        const card = document.createElement('div');
+        card.className = 'ocean-card overflow-hidden';
+
+        card.innerHTML = `
+            <div class="h-40 bg-gradient-to-br from-cyan-200 via-sky-300 to-blue-400 flex items-center justify-center relative">
+                <div class="text-7xl drop-shadow-lg">${game.icon || '🎮'}</div>
+                <span class="absolute top-3 left-3 bg-white/90 rounded-full px-3 py-1 text-xs font-black text-sky-800">${game.subject}</span>
+                <button class="absolute top-3 right-3 bg-white rounded-full w-9 h-9 text-lg" onclick="toggleFavorite('${game.id}')">${favorite?'❤️':'🤍'}</button>
+            </div>
+            <div class="p-5">
+                <div class="flex justify-between items-center gap-2">
+                    <span class="tag">${game.grade}</span>
+                    <span class="text-xs text-slate-400 font-bold">${game.plays || 0} lượt chơi</span>
+                </div>
+                <h3 class="text-xl font-bold text-sky-950 mt-3">${escapeHTML(game.title)}</h3>
+                <p class="text-sm text-slate-500 font-bold mt-2 min-h-[40px]">${escapeHTML(game.description || '')}</p>
+                <div class="text-xs text-slate-400 font-bold mt-3">✍️ ${escapeHTML(game.author || 'Giáo viên')}</div>
+                <button onclick="playGame('${game.id}')" class="ocean-button w-full py-3 mt-4 font-black">
+                    Chơi ngay <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+function escapeHTML(value) {
+    return String(value ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    })[c]);
+}
+
+function filterType(type) {
+    activeFilter = type;
+    renderGames();
+}
+
+function chooseSubject(subject) {
+    document.getElementById('subjectFilter').value = subject;
+    document.getElementById('games').scrollIntoView({behavior:'smooth'});
+    renderGames();
+}
+
+function toggleFavorite(id) {
+    favorites = favorites.includes(id)
+        ? favorites.filter(x => x !== id)
+        : [...favorites,id];
+
+    localStorage.setItem('oceanFavorites',JSON.stringify(favorites));
+    renderGames();
+}
+
+document.getElementById('searchInput').addEventListener('input',renderGames);
+document.getElementById('subjectFilter').addEventListener('change',renderGames);
+
+// ========================================
+// TẠO TRÒ CHƠI
+// ========================================
+
+function openCreator() {
+    document.getElementById('creatorModal').classList.add('active');
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+}
+
+document.getElementById('newType').addEventListener('change',function() {
+    document.getElementById('questionBuilder').style.display =
+        this.value === 'quiz' ? 'block' : 'none';
+});
+
+document.getElementById('createForm').addEventListener('submit',function(e) {
+    e.preventDefault();
+
+    const type = document.getElementById('newType').value;
+
+    const game = {
+        id:'game_'+Date.now(),
+        title:document.getElementById('newTitle').value.trim(),
+        subject:document.getElementById('newSubject').value,
+        grade:document.getElementById('newGrade').value,
+        type:type,
+        description:document.getElementById('newDescription').value.trim(),
+        author:'Giáo viên',
+        plays:0,
+        icon:type === 'quiz' ? '📝' : '🎡'
+    };
+
+    if(type === 'quiz') {
+        game.question = document.getElementById('questionText').value.trim();
+        game.options = [
+            document.getElementById('optionA').value.trim(),
+            document.getElementById('optionB').value.trim(),
+            document.getElementById('optionC').value.trim(),
+            document.getElementById('optionD').value.trim()
+        ];
+        game.correct = Number(document.getElementById('correctAnswer').value);
+    }
+
+    games.push(game);
+    saveGames();
+    renderGames();
+
+    this.reset();
+    closeModal('creatorModal');
+
+    document.getElementById('games').scrollIntoView({behavior:'smooth'});
+
+    if(window.confetti) confetti({particleCount:100,spread:70,origin:{y:.7}});
+    alert('🎉 Đã tạo trò chơi thành công trên trình duyệt này!');
+});
+
+function saveGames() {
+    const customGames = games.filter(g => !String(g.id).startsWith('sample'));
+    localStorage.setItem('oceanGames',JSON.stringify(customGames));
+}
+
+// ========================================
+// CHƠI TRÒ CHƠI
+// ========================================
+
+function playGame(id) {
+    currentGame = games.find(g => g.id === id);
+    if(!currentGame) return;
+
+    currentGame.plays = (currentGame.plays || 0) + 1;
+    saveGames();
+
+    const content = document.getElementById('playContent');
+
+    if(currentGame.type === 'wheel') {
+        content.innerHTML = `
+            <h2 class="text-2xl font-bold text-sky-900 text-center">${escapeHTML(currentGame.title)}</h2>
+            <div class="text-8xl text-center my-8" id="wheelIcon">🎡</div>
+            <p class="text-center text-slate-500 font-bold">Nhấn nút để quay vòng may mắn!</p>
+            <button class="ocean-button w-full py-4 font-black mt-5" onclick="spinWheel()">QUAY NGAY!</button>
+            <div id="wheelResult" class="text-center text-xl font-black text-cyan-700 mt-5"></div>
+        `;
+    } else {
+        content.innerHTML = `
+            <div class="text-center">
+                <span class="section-label">${escapeHTML(currentGame.subject)}</span>
+                <h2 class="text-2xl font-bold text-sky-950 mt-4">${escapeHTML(currentGame.title)}</h2>
+                <div class="text-sm text-slate-400 font-bold mt-2">Câu hỏi thử thách</div>
+                <p class="text-xl font-black text-sky-900 mt-5">${escapeHTML(currentGame.question || '')}</p>
+            </div>
+            <div class="grid grid-cols-1 gap-3 mt-6">
+                ${(currentGame.options || []).map((option,index) =>
+                    `<button class="game-option text-left" onclick="answerQuestion(${index},this)">
+                    ${String.fromCharCode(65+index)}. ${escapeHTML(option)}
+                    </button>`
+                ).join('')}
+            </div>
+            <div id="answerResult" class="text-center font-black text-lg mt-5"></div>
+        `;
+    }
+
+    document.getElementById('playModal').classList.add('active');
+    renderGames();
+}
+
+function answerQuestion(index,button) {
+    const options = document.querySelectorAll('.game-option');
+    options.forEach(option => option.disabled = true);
+
+    const result = document.getElementById('answerResult');
+
+    if(index === currentGame.correct) {
+        button.classList.add('correct');
+        result.innerHTML = '🎉 Chính xác! Bạn thật tuyệt vời!';
+        result.style.color = '#15966a';
+
+        if(window.confetti) confetti({particleCount:100,spread:80,origin:{y:.7}});
+    } else {
+        button.classList.add('wrong');
+        if(options[currentGame.correct]) options[currentGame.correct].classList.add('correct');
+        result.innerHTML = '💙 Chưa chính xác. Hãy thử lại ở trò chơi tiếp theo nhé!';
+        result.style.color = '#d15c78';
+    }
+}
+
+function spinWheel() {
+    const icon = document.getElementById('wheelIcon');
+    const result = document.getElementById('wheelResult');
+    const messages = ['Bạn nhận được 1 ngọc trai! 💎','Bạn là nhà thám hiểm xuất sắc! 🐳','Một thử thách mới đang chờ bạn! 🌊','Chúc mừng! Bạn đã chiến thắng! 🏆'];
+
+    icon.style.transition = 'transform 2s ease-out';
+    icon.style.transform = 'rotate(1080deg)';
+
+    setTimeout(() => {
+        result.innerHTML = messages[Math.floor(Math.random()*messages.length)];
+        if(window.confetti) confetti({particleCount:80,spread:70});
+    },2000);
+}
+
+// ========================================
+// KHỞI ĐỘNG
+// ========================================
+
+renderGames();
+
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click',function(e) {
+        if(e.target === this) this.classList.remove('active');
+    });
+});
+</script>
 
 </body>
 </html>
