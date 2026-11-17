@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -7,236 +6,330 @@
 <title>Đại Dương Tri Thức - Khám phá và chinh phục</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
 :root {
-    --cyan:#08bfd0;
-    --blue:#087fae;
-    --deep:#075477;
-    --light:#e8fafc;
-    --lavender:#b8a9f5;
-    --pink:#ffb8d2;
-    --text:#24485a;
+    --pink-primary: #ec4899;
+    --purple-primary: #7e22ce;
+    --deep-ocean: #2e1065;
+    --text-main: #3b175c;
 }
 
-* { box-sizing:border-box; }
+* { box-sizing: border-box; }
 
 body {
-    margin:0;
-    font-family:'Nunito',sans-serif;
-    color:var(--text);
-    background:
-      radial-gradient(circle at 10% 15%,#d9f8fc 0,transparent 30%),
-      radial-gradient(circle at 90% 45%,#d9f2ff 0,transparent 30%),
-      linear-gradient(180deg,#e8fafc,#d1f2f8 55%,#effcff);
-    overflow-x:hidden;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-main);
+    background: linear-gradient(180deg, #ffe4ef 0%, #f5d0fe 22%, #d8b4fe 48%, #a855f7 76%, #581c87 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
 }
 
-h1,h2,h3,.brand-font { font-family:'Fredoka',sans-serif; }
+h1, h2, h3, .brand-font { font-family: 'Fredoka', sans-serif; }
+
+/* Bối cảnh biển hồng - tím cố định */
+.ocean-backdrop {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.sun-ray {
+    position: absolute;
+    top: -15%;
+    width: 140px;
+    height: 130%;
+    background: linear-gradient(180deg, rgba(255, 241, 248, 0.45) 0%, rgba(253, 186, 226, 0.12) 60%, transparent 100%);
+    transform: rotate(18deg);
+    animation: raySway 9s ease-in-out infinite alternate;
+}
+
+@keyframes raySway {
+    0% { transform: rotate(14deg) translateX(-15px); opacity: 0.65; }
+    100% { transform: rotate(22deg) translateX(20px); opacity: 0.95; }
+}
+
+.bg-bubble {
+    position: absolute;
+    bottom: -40px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(244,114,182,0.25) 65%, rgba(168,85,247,0.35));
+    border: 1.5px solid rgba(255,255,255,0.75);
+    animation: riseUp linear infinite;
+}
+
+@keyframes riseUp {
+    0% { transform: translateY(0) scale(0.85); opacity: 0; }
+    15% { opacity: 0.85; }
+    85% { opacity: 0.7; }
+    100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+}
+
+.jellyfish-float {
+    position: absolute;
+    font-size: 36px;
+    filter: drop-shadow(0 0 12px rgba(244, 114, 182, 0.75));
+    animation: jellyDrift 8s ease-in-out infinite;
+}
+
+@keyframes jellyDrift {
+    0%, 100% { transform: translateY(0) rotate(-6deg); }
+    50% { transform: translateY(-25px) rotate(6deg); }
+}
+
+/* Chữ bong bóng 3D cho tên trang web */
+.bubble-logo-text {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbcfe8 38%, #ec4899 72%, #7e22ce 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1.5px #ffffff;
+    filter:
+        drop-shadow(0 2px 0 #9d174d)
+        drop-shadow(0 4px 0 #581c87)
+        drop-shadow(0 6px 10px rgba(126, 34, 206, 0.35));
+    position: relative;
+    display: inline-block;
+}
 
 .glass {
-    background:rgba(255,255,255,.88);
-    backdrop-filter:blur(16px);
-    border:2px solid rgba(255,255,255,.95);
-    box-shadow:0 12px 30px rgba(8,127,174,.12);
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 12px 30px rgba(126, 34, 206, 0.14);
 }
 
 .ocean-button {
-    background:linear-gradient(135deg,#08bfd0,#087fae);
-    color:white;
-    border-radius:17px;
-    box-shadow:0 6px 0 #06658a,0 12px 22px rgba(8,127,174,.18);
-    transition:.2s;
+    background: linear-gradient(135deg, #f43f5e, #d946ef 55%, #7e22ce);
+    color: white;
+    border-radius: 17px;
+    box-shadow: 0 5px 0 #6b21a8, 0 12px 22px rgba(168, 85, 247, 0.28);
+    transition: .2s;
 }
 
 .ocean-button:hover {
-    transform:translateY(-3px);
-    box-shadow:0 9px 0 #06658a,0 15px 25px rgba(8,127,174,.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 #6b21a8, 0 15px 25px rgba(168, 85, 247, 0.35);
 }
 
 .white-button {
-    background:white;
-    border:2px solid #c5edf3;
-    color:#087fae;
-    border-radius:16px;
-    transition:.2s;
+    background: white;
+    border: 2px solid #f5d0fe;
+    color: #86198f;
+    border-radius: 16px;
+    transition: .2s;
 }
 
-.white-button:hover { background:#e5faff; }
+.white-button:hover {
+    background: #fdf4ff;
+    border-color: #e879f9;
+}
 
 .ocean-card {
-    background:linear-gradient(145deg,#fff,#f0fcfd);
-    border:2px solid white;
-    border-radius:25px;
-    box-shadow:0 12px 28px rgba(8,127,174,.12);
-    transition:.25s;
+    background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(253,244,255,0.92));
+    border: 2px solid white;
+    border-radius: 25px;
+    box-shadow: 0 12px 28px rgba(107, 33, 168, 0.15);
+    transition: .25s;
 }
 
 .ocean-card:hover {
-    transform:translateY(-6px);
-    box-shadow:0 20px 35px rgba(8,127,174,.19);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px rgba(126, 34, 206, 0.24);
 }
 
 .hero-bg {
-    background:linear-gradient(135deg,#54d9e6,#45b8e4 55%,#498cce);
-    position:relative;
-    overflow:hidden;
+    background: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #7e22ce 100%);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.55);
 }
 
-.hero-bg:before,.hero-bg:after {
-    content:"";
-    position:absolute;
-    width:300px;
-    height:300px;
-    border-radius:50%;
-    background:rgba(255,255,255,.12);
+.hero-bg:before, .hero-bg:after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
 }
 
-.hero-bg:before { top:-150px;left:-60px; }
-.hero-bg:after { bottom:-190px;right:-40px; }
+.hero-bg:before { top: -150px; left: -60px; }
+.hero-bg:after { bottom: -190px; right: -40px; }
 
 .bubble {
-    position:absolute;
-    border:2px solid rgba(255,255,255,.65);
-    background:rgba(255,255,255,.22);
-    border-radius:50%;
-    animation:float 6s ease-in-out infinite;
-    pointer-events:none;
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
 }
 
 @keyframes float {
-    0%,100% { transform:translateY(0); }
-    50% { transform:translateY(-22px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-22px); }
 }
 
 .fish {
-    animation:swim 4s ease-in-out infinite;
+    animation: swim 4s ease-in-out infinite;
 }
 
 @keyframes swim {
-    0%,100% { transform:translateX(0) rotate(-4deg); }
-    50% { transform:translateX(12px) rotate(4deg); }
+    0%, 100% { transform: translateX(0) rotate(-4deg); }
+    50% { transform: translateX(12px) rotate(4deg); }
 }
 
 .wave {
-    position:absolute;
-    bottom:-2px;
-    left:0;
-    width:100%;
-    height:55px;
-    background:rgba(255,255,255,.28);
-    border-radius:50% 50% 0 0;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.26);
+    border-radius: 50% 50% 0 0;
 }
 
 .nav-link {
-    padding:10px 15px;
-    border-radius:14px;
-    font-weight:900;
-    color:#17617e;
-    white-space:nowrap;
+    padding: 10px 15px;
+    border-radius: 14px;
+    font-weight: 900;
+    color: #6b21a8;
+    white-space: nowrap;
+    transition: .2s;
 }
 
-.nav-link:hover { background:#e3f9fc; }
+.nav-link:hover { background: #fae8ff; color: #be185d; }
 
 .section-label {
-    display:inline-block;
-    padding:7px 16px;
-    border-radius:30px;
-    background:#d5f5f8;
-    color:#087fae;
-    font-weight:900;
-    font-size:12px;
-    letter-spacing:1px;
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.88);
+    color: #9d174d;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(157, 23, 77, 0.12);
 }
 
 .modal {
-    position:fixed;
-    inset:0;
-    z-index:100;
-    background:rgba(3,43,65,.65);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:16px;
-    overflow-y:auto;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(46, 16, 101, 0.72);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow-y: auto;
 }
 
-.modal.active { display:flex; }
+.modal.active { display: flex; }
 
 .modal-box {
-    background:white;
-    width:100%;
-    max-width:650px;
-    max-height:90vh;
-    overflow-y:auto;
-    border-radius:28px;
-    padding:25px;
-    box-shadow:0 25px 70px rgba(0,0,0,.25);
+    background: white;
+    width: 100%;
+    max-width: 650px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 28px;
+    padding: 25px;
+    box-shadow: 0 25px 70px rgba(46, 16, 101, 0.35);
+    border: 3px solid #f5d0fe;
 }
 
-input,select,textarea {
-    width:100%;
-    border:2px solid #d5edf2;
-    border-radius:13px;
-    padding:12px;
-    outline:none;
-    font-family:'Nunito',sans-serif;
-    color:#24485a;
+input, select, textarea {
+    width: 100%;
+    border: 2px solid #f3e8ff;
+    border-radius: 13px;
+    padding: 12px;
+    outline: none;
+    font-family: 'Nunito', sans-serif;
+    color: #3b175c;
 }
 
-input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
+input:focus, select:focus, textarea:focus { border-color: #d946ef; }
 
 .game-option {
-    border:2px solid #d8edf2;
-    border-radius:15px;
-    padding:14px;
-    cursor:pointer;
-    transition:.2s;
-    font-weight:800;
-    background:white;
+    border: 2px solid #f3e8ff;
+    border-radius: 15px;
+    padding: 14px;
+    cursor: pointer;
+    transition: .2s;
+    font-weight: 800;
+    background: white;
+    color: #3b175c;
 }
 
-.game-option:hover { background:#eafaff; border-color:#08bfd0; }
-.game-option.correct { background:#d5f8e7;border-color:#27b777;color:#087b50; }
-.game-option.wrong { background:#ffe2e8;border-color:#ed7991;color:#b83254; }
+.game-option:hover { background: #fdf4ff; border-color: #d946ef; }
+.game-option.correct { background: #d5f8e7; border-color: #27b777; color: #087b50; }
+.game-option.wrong { background: #ffe2e8; border-color: #ed7991; color: #b83254; }
 
 .tag {
-    display:inline-block;
-    background:#e5f8fb;
-    color:#087fae;
-    padding:5px 11px;
-    border-radius:30px;
-    font-size:11px;
-    font-weight:900;
+    display: inline-block;
+    background: #fae8ff;
+    color: #86198f;
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 900;
+    transition: .2s;
 }
 
-.hidden-section { display:none; }
+.tag:hover { background: #f5d0fe; }
 
-@media(max-width:768px) {
-    .desktop-nav { display:none; }
-    .hero-title { font-size:36px!important; }
+@media(max-width: 768px) {
+    .desktop-nav { display: none; }
+    .hero-title { font-size: 36px !important; }
 }
 </style>
 </head>
 
 <body>
 
+<!-- NỀN BIỂN HOÀNG HÔN HỒNG - TÍM -->
+<div class="ocean-backdrop" aria-hidden="true">
+    <div class="sun-ray" style="left: 12%;"></div>
+    <div class="sun-ray" style="left: 42%; animation-delay: 2s;"></div>
+    <div class="sun-ray" style="left: 74%; animation-delay: 4s;"></div>
+
+    <div class="jellyfish-float" style="top: 18%; left: 6%;">🪼</div>
+    <div class="jellyfish-float" style="top: 52%; right: 5%; animation-delay: 3s;">🪼</div>
+    <div class="jellyfish-float" style="top: 76%; left: 14%; font-size: 28px; animation-delay: 1.5s;">🐠</div>
+    <div class="jellyfish-float" style="top: 34%; right: 12%; font-size: 28px; animation-delay: 4.5s;">🫧</div>
+
+    <div class="bg-bubble" style="left: 8%; width: 18px; height: 18px; animation-duration: 11s;"></div>
+    <div class="bg-bubble" style="left: 22%; width: 28px; height: 28px; animation-duration: 14s; animation-delay: 2s;"></div>
+    <div class="bg-bubble" style="left: 38%; width: 14px; height: 14px; animation-duration: 9s; animation-delay: 4s;"></div>
+    <div class="bg-bubble" style="left: 55%; width: 24px; height: 24px; animation-duration: 13s; animation-delay: 1s;"></div>
+    <div class="bg-bubble" style="left: 71%; width: 16px; height: 16px; animation-duration: 10s; animation-delay: 3s;"></div>
+    <div class="bg-bubble" style="left: 88%; width: 32px; height: 32px; animation-duration: 15s; animation-delay: 5s;"></div>
+</div>
+
 <!-- HEADER -->
 <header class="sticky top-0 z-50 px-3 py-3">
 <div class="max-w-7xl mx-auto glass rounded-3xl px-4 md:px-6 py-3 flex items-center justify-between gap-3">
 
     <a href="#home" class="flex items-center gap-3 min-w-0">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-3xl shadow-lg">
-            🐳
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-400 via-fuchsia-500 to-purple-700 flex items-center justify-center text-3xl shadow-lg border-2 border-white/80">
+            🐬
         </div>
         <div class="min-w-0">
-            <div class="brand-font text-lg md:text-xl font-bold text-sky-900 leading-tight">
+            <div class="bubble-logo-text text-xl md:text-2xl leading-tight">
                 ĐẠI DƯƠNG TRI THỨC
             </div>
-            <div class="text-[9px] md:text-[10px] font-black tracking-widest text-cyan-700">
+            <div class="text-[9px] md:text-[10px] font-black tracking-widest text-fuchsia-800">
                 OCEAN OF KNOWLEDGE
             </div>
         </div>
@@ -259,29 +352,29 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
 </header>
 
 <!-- HERO -->
-<section id="home" class="px-4 pt-5 pb-12">
+<section id="home" class="relative z-10 px-4 pt-5 pb-12">
 <div class="max-w-7xl mx-auto hero-bg rounded-[35px] min-h-[420px] md:min-h-[460px] shadow-2xl p-7 md:p-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
 
     <div class="relative z-10 text-center lg:text-left">
-        <div class="inline-flex bg-white/90 rounded-full px-5 py-2 text-xs md:text-sm font-black text-sky-800 mb-5 shadow">
-            🌊 CHÀO MỪNG ĐẾN VỚI THẾ GIỚI TRI THỨC
+        <div class="inline-flex bg-white/95 rounded-full px-5 py-2 text-xs md:text-sm font-black text-purple-900 mb-5 shadow">
+            🌅 CHÀO MỪNG ĐẾN VỚI ĐẠI DƯƠNG HOÀNG HÔN
         </div>
 
         <h1 class="hero-title text-5xl md:text-6xl font-bold text-white leading-tight drop-shadow-lg">
             KHÁM PHÁ<br>
             ĐẠI DƯƠNG
-            <span class="block text-yellow-200">CHINH PHỤC TRI THỨC!</span>
+            <span class="block text-amber-200">CHINH PHỤC TRI THỨC!</span>
         </h1>
 
         <p class="text-white text-base md:text-lg font-bold mt-5 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            Nơi thầy cô sáng tạo trò chơi, học sinh khám phá kiến thức và cùng nhau mở ra hàng ngàn điều kỳ thú!
+            Nơi thầy cô sáng tạo trò chơi, học sinh khám phá kiến thức và cùng nhau mở ra hàng ngàn điều kỳ thú dưới biển hoàng hôn hồng tím!
         </p>
 
         <div class="flex flex-wrap gap-4 justify-center lg:justify-start mt-7">
-            <a href="#games" class="bg-white text-sky-800 px-7 py-4 rounded-2xl font-black shadow-xl hover:-translate-y-1 transition">
-                <i class="fa-solid fa-compass mr-2"></i>Khám phá ngay
+            <a href="#games" class="bg-white text-purple-900 px-7 py-4 rounded-2xl font-black shadow-xl hover:-translate-y-1 transition">
+                <i class="fa-solid fa-compass mr-2 text-pink-600"></i>Khám phá ngay
             </a>
-            <button onclick="openCreator()" class="bg-yellow-300 text-sky-950 px-7 py-4 rounded-2xl font-black shadow-xl hover:-translate-y-1 transition">
+            <button onclick="openCreator()" class="bg-amber-300 text-purple-950 px-7 py-4 rounded-2xl font-black shadow-xl hover:-translate-y-1 transition">
                 <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Thầy cô sáng tạo
             </button>
         </div>
@@ -294,17 +387,17 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
     </div>
 
     <div class="relative z-10 flex justify-center items-center min-h-[270px]">
-        <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-white/20 rounded-full blur-xl"></div>
+        <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-pink-200/30 rounded-full blur-xl"></div>
 
         <div class="relative text-center">
-            <div class="text-9xl md:text-[150px] fish drop-shadow-2xl">🐳</div>
-            <div class="absolute -top-5 -right-10 text-5xl fish">🐬</div>
+            <div class="text-9xl md:text-[150px] fish drop-shadow-2xl">🐬</div>
+            <div class="absolute -top-5 -right-10 text-5xl fish">🪼</div>
             <div class="absolute top-20 -left-12 text-4xl">🐢</div>
             <div class="absolute bottom-0 -right-12 text-4xl">🐙</div>
-            <div class="absolute -bottom-8 left-0 text-4xl">🐠</div>
-            <div class="bg-white/90 rounded-2xl px-5 py-3 shadow-xl mt-3">
-                <div class="font-black text-sky-900">Xin chào! Mình là Cá Voi Xanh</div>
-                <div class="text-xs font-bold text-cyan-700">Người bạn đồng hành của bạn 🫧</div>
+            <div class="absolute -bottom-8 left-0 text-4xl">🐚</div>
+            <div class="bg-white/95 rounded-2xl px-5 py-3 shadow-xl mt-3 border-2 border-pink-200">
+                <div class="font-black text-purple-950">Xin chào! Mình là Bọt Biển</div>
+                <div class="text-xs font-bold text-pink-600">Người bạn đồng hành của bạn 🫧</div>
             </div>
         </div>
     </div>
@@ -317,45 +410,45 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
 </section>
 
 <!-- QUICK STATS -->
-<section class="px-4 -mt-3 relative z-10">
+<section class="relative z-10 px-4 -mt-3">
 <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
     <div class="glass rounded-2xl p-4 text-center">
         <div class="text-3xl">🎮</div>
-        <div class="text-2xl font-black text-sky-800" id="gameCount">3</div>
-        <div class="text-xs font-bold text-slate-500">Trò chơi</div>
+        <div class="text-2xl font-black text-purple-900" id="gameCount">3</div>
+        <div class="text-xs font-bold text-purple-700">Trò chơi</div>
     </div>
     <div class="glass rounded-2xl p-4 text-center">
         <div class="text-3xl">📚</div>
-        <div class="text-2xl font-black text-sky-800">4</div>
-        <div class="text-xs font-bold text-slate-500">Vùng biển</div>
+        <div class="text-2xl font-black text-purple-900">4</div>
+        <div class="text-xs font-bold text-purple-700">Vùng biển</div>
     </div>
     <div class="glass rounded-2xl p-4 text-center">
         <div class="text-3xl">🧑‍🏫</div>
-        <div class="text-2xl font-black text-sky-800">∞</div>
-        <div class="text-xs font-bold text-slate-500">Giáo viên sáng tạo</div>
+        <div class="text-2xl font-black text-purple-900">∞</div>
+        <div class="text-xs font-bold text-purple-700">Giáo viên sáng tạo</div>
     </div>
     <div class="glass rounded-2xl p-4 text-center">
-        <div class="text-3xl">💎</div>
-        <div class="text-2xl font-black text-sky-800">100%</div>
-        <div class="text-xs font-bold text-slate-500">Niềm vui học tập</div>
+        <div class="text-3xl">🫧</div>
+        <div class="text-2xl font-black text-purple-900">100%</div>
+        <div class="text-xs font-bold text-purple-700">Niềm vui học tập</div>
     </div>
 </div>
 </section>
 
 <!-- GAME LIBRARY -->
-<section id="games" class="py-16 px-4">
+<section id="games" class="relative z-10 py-16 px-4">
 <div class="max-w-7xl mx-auto">
 
     <div class="text-center mb-9">
         <span class="section-label">🎮 KHO BÁU TRI THỨC</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-sky-950 mt-3">KHO TRÒ CHƠI GIÁO DỤC</h2>
-        <p class="font-bold text-slate-500 mt-2">Chọn trò chơi và bắt đầu hành trình khám phá!</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-purple-950 mt-3 drop-shadow-sm">KHO TRÒ CHƠI GIÁO DỤC</h2>
+        <p class="font-bold text-purple-900/80 mt-2">Chọn trò chơi và bắt đầu hành trình khám phá!</p>
     </div>
 
     <div class="glass rounded-3xl p-4 md:p-5 mb-7">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div class="md:col-span-2 relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-cyan-600"></i>
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-pink-600"></i>
                 <input id="searchInput" class="pl-11" placeholder="Tìm tên trò chơi, kiến thức, tác giả...">
             </div>
             <select id="subjectFilter">
@@ -380,52 +473,52 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
 
     <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-    <div id="emptyGames" class="hidden text-center py-12">
+    <div id="emptyGames" class="hidden text-center py-12 glass rounded-3xl">
         <div class="text-6xl">🐚</div>
-        <h3 class="text-2xl font-bold text-sky-900 mt-3">Chưa tìm thấy trò chơi</h3>
-        <p class="text-slate-500 mt-2">Hãy thử từ khóa khác nhé!</p>
+        <h3 class="text-2xl font-bold text-purple-950 mt-3">Chưa tìm thấy trò chơi</h3>
+        <p class="text-purple-700 font-bold mt-2">Hãy thử từ khóa khác nhé!</p>
     </div>
 
 </div>
 </section>
 
 <!-- SUBJECT WORLDS -->
-<section id="worlds" class="py-16 px-4 bg-white/50">
+<section id="worlds" class="relative z-10 py-16 px-4 bg-white/30 backdrop-blur-sm">
 <div class="max-w-7xl mx-auto">
 
     <div class="text-center mb-10">
         <span class="section-label">🌊 THẾ GIỚI KỲ THÚ</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-sky-950 mt-3">BỐN VÙNG BIỂN MÔN HỌC</h2>
-        <p class="font-bold text-slate-500 mt-2">Mỗi vùng biển là một hành trình khám phá mới!</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-purple-950 mt-3">BỐN VÙNG BIỂN MÔN HỌC</h2>
+        <p class="font-bold text-purple-900/80 mt-2">Mỗi vùng biển là một hành trình khám phá mới!</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
         <div class="ocean-card p-6 text-center">
             <div class="text-6xl mb-4">🧮</div>
-            <h3 class="text-2xl font-bold text-sky-900">Đảo Toán Học</h3>
-            <p class="text-sm font-bold text-slate-500 mt-2">Phép tính, hình học và những thử thách tư duy.</p>
+            <h3 class="text-2xl font-bold text-purple-950">Đảo Toán Học</h3>
+            <p class="text-sm font-bold text-purple-800/75 mt-2">Phép tính, hình học và những thử thách tư duy.</p>
             <button onclick="chooseSubject('Toán học')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
         </div>
 
         <div class="ocean-card p-6 text-center">
             <div class="text-6xl mb-4">📚</div>
-            <h3 class="text-2xl font-bold text-sky-900">Vịnh Ngôn Ngữ</h3>
-            <p class="text-sm font-bold text-slate-500 mt-2">Từ vựng, đọc hiểu và thế giới văn học.</p>
+            <h3 class="text-2xl font-bold text-purple-950">Vịnh Ngôn Ngữ</h3>
+            <p class="text-sm font-bold text-purple-800/75 mt-2">Từ vựng, đọc hiểu và thế giới văn học.</p>
             <button onclick="chooseSubject('Tiếng Việt')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
         </div>
 
         <div class="ocean-card p-6 text-center">
             <div class="text-6xl mb-4">🪸</div>
-            <h3 class="text-2xl font-bold text-sky-900">Rạn San Hô</h3>
-            <p class="text-sm font-bold text-slate-500 mt-2">Khoa học, tự nhiên và thế giới sinh vật.</p>
+            <h3 class="text-2xl font-bold text-purple-950">Rạn San Hô</h3>
+            <p class="text-sm font-bold text-purple-800/75 mt-2">Khoa học, tự nhiên và thế giới sinh vật.</p>
             <button onclick="chooseSubject('Khoa học')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
         </div>
 
         <div class="ocean-card p-6 text-center">
             <div class="text-6xl mb-4">🗺️</div>
-            <h3 class="text-2xl font-bold text-sky-900">Vùng Biển Khám Phá</h3>
-            <p class="text-sm font-bold text-slate-500 mt-2">Lịch sử, địa lí và hành trình quê hương.</p>
+            <h3 class="text-2xl font-bold text-purple-950">Vùng Biển Khám Phá</h3>
+            <p class="text-sm font-bold text-purple-800/75 mt-2">Lịch sử, địa lí và hành trình quê hương.</p>
             <button onclick="chooseSubject('Lịch sử & Địa lí')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
         </div>
 
@@ -434,17 +527,17 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
 </section>
 
 <!-- WORKSHOP -->
-<section id="workshop" class="py-16 px-4">
+<section id="workshop" class="relative z-10 py-16 px-4">
 <div class="max-w-7xl mx-auto">
     <div class="hero-bg rounded-[32px] p-7 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center shadow-xl">
 
         <div class="text-center md:text-left">
-            <span class="bg-white/90 text-sky-800 px-4 py-2 rounded-full text-xs font-black">✨ DÀNH CHO GIÁO VIÊN</span>
+            <span class="bg-white/95 text-purple-900 px-4 py-2 rounded-full text-xs font-black">✨ DÀNH CHO GIÁO VIÊN</span>
             <h2 class="text-4xl md:text-5xl font-bold text-white mt-5">XƯỞNG SÁNG TẠO</h2>
             <p class="text-white font-bold mt-4 leading-relaxed">
                 Biến ý tưởng bài học thành trò chơi sinh động. Thầy cô có thể tự tạo, lưu và chia sẻ những trò chơi của mình!
             </p>
-            <button onclick="openCreator()" class="bg-yellow-300 text-sky-950 px-7 py-4 rounded-2xl font-black mt-7 shadow-xl hover:-translate-y-1 transition">
+            <button onclick="openCreator()" class="bg-amber-300 text-purple-950 px-7 py-4 rounded-2xl font-black mt-7 shadow-xl hover:-translate-y-1 transition">
                 <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Bắt đầu sáng tạo
             </button>
         </div>
@@ -452,15 +545,15 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
         <div class="flex justify-center gap-4 flex-wrap">
             <div class="bg-white rounded-3xl p-5 text-center shadow-xl w-36 rotate-[-5deg]">
                 <div class="text-5xl">📝</div>
-                <div class="font-black text-sky-900 mt-3">Trắc nghiệm</div>
+                <div class="font-black text-purple-950 mt-3">Trắc nghiệm</div>
             </div>
             <div class="bg-white rounded-3xl p-5 text-center shadow-xl w-36 rotate-[5deg]">
                 <div class="text-5xl">🎡</div>
-                <div class="font-black text-sky-900 mt-3">Vòng quay</div>
+                <div class="font-black text-purple-950 mt-3">Vòng quay</div>
             </div>
             <div class="bg-white rounded-3xl p-5 text-center shadow-xl w-36 rotate-[-3deg]">
                 <div class="text-5xl">🧩</div>
-                <div class="font-black text-sky-900 mt-3">Ghép đôi</div>
+                <div class="font-black text-purple-950 mt-3">Ghép đôi</div>
             </div>
         </div>
     </div>
@@ -468,67 +561,67 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
 </section>
 
 <!-- COMMUNITY -->
-<section id="community" class="py-16 px-4 bg-white/50">
+<section id="community" class="relative z-10 py-16 px-4 bg-white/30 backdrop-blur-sm">
 <div class="max-w-7xl mx-auto">
     <div class="text-center mb-9">
         <span class="section-label">🧑‍🏫 KẾT NỐI VÀ CHIA SẺ</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-sky-950 mt-3">CỘNG ĐỒNG GIÁO VIÊN</h2>
-        <p class="font-bold text-slate-500 mt-2">Mỗi ý tưởng là một viên ngọc quý của đại dương tri thức.</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white drop-shadow mt-3">CỘNG ĐỒNG GIÁO VIÊN</h2>
+        <p class="font-bold text-pink-100 mt-2">Mỗi ý tưởng là một viên ngọc quý của đại dương tri thức.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="ocean-card p-7 text-center">
             <div class="text-5xl">🌟</div>
-            <h3 class="text-xl font-bold mt-3 text-sky-900">Chia sẻ sáng tạo</h3>
-            <p class="text-sm text-slate-500 font-bold mt-2">Cùng chia sẻ trò chơi và ý tưởng dạy học.</p>
+            <h3 class="text-xl font-bold mt-3 text-purple-950">Chia sẻ sáng tạo</h3>
+            <p class="text-sm text-purple-800/75 font-bold mt-2">Cùng chia sẻ trò chơi và ý tưởng dạy học.</p>
         </div>
         <div class="ocean-card p-7 text-center">
             <div class="text-5xl">💎</div>
-            <h3 class="text-xl font-bold mt-3 text-sky-900">Kho báu chung</h3>
-            <p class="text-sm text-slate-500 font-bold mt-2">Khám phá những sản phẩm giáo dục hữu ích.</p>
+            <h3 class="text-xl font-bold mt-3 text-purple-950">Kho báu chung</h3>
+            <p class="text-sm text-purple-800/75 font-bold mt-2">Khám phá những sản phẩm giáo dục hữu ích.</p>
         </div>
         <div class="ocean-card p-7 text-center">
             <div class="text-5xl">🤝</div>
-            <h3 class="text-xl font-bold mt-3 text-sky-900">Cùng phát triển</h3>
-            <p class="text-sm text-slate-500 font-bold mt-2">Sao chép trò chơi và phát triển ý tưởng riêng.</p>
+            <h3 class="text-xl font-bold mt-3 text-purple-950">Cùng phát triển</h3>
+            <p class="text-sm text-purple-800/75 font-bold mt-2">Sao chép trò chơi và phát triển ý tưởng riêng.</p>
         </div>
     </div>
 </div>
 </section>
 
 <!-- RESOURCE LIBRARY -->
-<section class="py-14 px-4">
+<section class="relative z-10 py-14 px-4">
 <div class="max-w-7xl mx-auto glass rounded-[30px] p-7 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
     <div>
         <span class="section-label">📚 GÓC TÀI NGUYÊN</span>
-        <h2 class="text-3xl font-bold text-sky-950 mt-3">THƯ VIỆN HỌC LIỆU</h2>
-        <p class="font-bold text-slate-500 mt-2">Nơi lưu giữ những tài liệu, hình ảnh và ý tưởng dạy học hữu ích.</p>
+        <h2 class="text-3xl font-bold text-purple-950 mt-3">THƯ VIỆN HỌC LIỆU</h2>
+        <p class="font-bold text-purple-800/80 mt-2">Nơi lưu giữ những tài liệu, hình ảnh và ý tưởng dạy học hữu ích.</p>
     </div>
     <div class="text-7xl">📖🪸</div>
 </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-sky-950 text-white px-5 py-10">
+<footer class="relative z-10 bg-purple-950/90 text-white px-5 py-10 border-t border-pink-400/30">
 <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
     <div>
-        <div class="brand-font text-2xl font-bold">🐳 ĐẠI DƯƠNG TRI THỨC</div>
-        <p class="text-sky-200 text-sm font-bold mt-3">Khám phá đại dương – Chinh phục tri thức!</p>
+        <div class="bubble-logo-text text-2xl">ĐẠI DƯƠNG TRI THỨC</div>
+        <p class="text-pink-200 text-sm font-bold mt-3">Khám phá đại dương – Chinh phục tri thức!</p>
     </div>
     <div>
-        <h3 class="font-black text-lg mb-3">Khám phá</h3>
-        <div class="text-sm text-sky-200 space-y-2">
-            <p><a href="#games">Kho trò chơi</a></p>
-            <p><a href="#worlds">Các môn học</a></p>
-            <p><a href="#workshop">Xưởng sáng tạo</a></p>
+        <h3 class="font-black text-lg mb-3 text-pink-200">Khám phá</h3>
+        <div class="text-sm text-purple-200 space-y-2">
+            <p><a href="#games" class="hover:text-white">Kho trò chơi</a></p>
+            <p><a href="#worlds" class="hover:text-white">Các môn học</a></p>
+            <p><a href="#workshop" class="hover:text-white">Xưởng sáng tạo</a></p>
         </div>
     </div>
     <div>
-        <h3 class="font-black text-lg mb-3">Thông điệp</h3>
-        <p class="text-sm text-sky-200">Một đại dương – Ngàn khám phá – Vạn niềm vui học tập!</p>
+        <h3 class="font-black text-lg mb-3 text-pink-200">Thông điệp</h3>
+        <p class="text-sm text-purple-200">Một đại dương – Ngàn khám phá – Vạn niềm vui học tập!</p>
     </div>
 </div>
-<div class="text-center text-xs text-sky-300 mt-9 border-t border-sky-800 pt-5">
+<div class="text-center text-xs text-pink-300/80 mt-9 border-t border-purple-800 pt-5">
     © 2026 Đại Dương Tri Thức. Cùng nhau lan tỏa tri thức.
 </div>
 </footer>
@@ -539,9 +632,9 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
     <div class="flex justify-between items-center mb-5">
         <div>
             <span class="section-label">✨ XƯỞNG SÁNG TẠO</span>
-            <h2 class="text-2xl font-bold text-sky-950 mt-2">Tạo trò chơi mới</h2>
+            <h2 class="text-2xl font-bold text-purple-950 mt-2">Tạo trò chơi mới</h2>
         </div>
-        <button onclick="closeModal('creatorModal')" class="text-2xl text-slate-400">✕</button>
+        <button onclick="closeModal('creatorModal')" class="text-2xl text-slate-400 hover:text-pink-600">✕</button>
     </div>
 
     <form id="createForm" class="space-y-4">
@@ -568,7 +661,7 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
                     <option>Lớp 1</option>
                     <option>Lớp 2</option>
                     <option>Lớp 3</option>
-                    <option>Lớp 4</option>
+                    <option selected>Lớp 4</option>
                     <option>Lớp 5</option>
                     <option>Lớp 6–9</option>
                     <option>Lớp 10–12</option>
@@ -608,7 +701,7 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
             </select>
         </div>
 
-        <p class="text-xs text-slate-500">Phiên bản thử nghiệm: mỗi trò chơi trắc nghiệm có một câu hỏi. Có thể bổ sung nhiều câu hỏi trong phiên bản tiếp theo.</p>
+        <p class="text-xs text-purple-600">Phiên bản thử nghiệm: mỗi trò chơi trắc nghiệm có một câu hỏi. Có thể bổ sung nhiều câu hỏi trong phiên bản tiếp theo.</p>
 
         <button type="submit" class="ocean-button w-full py-4 font-black">
             <i class="fa-solid fa-floppy-disk mr-2"></i>Lưu trò chơi
@@ -622,7 +715,7 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
 <div class="modal-box">
     <div class="flex justify-between items-center">
         <span class="section-label">🎮 THỬ THÁCH TRI THỨC</span>
-        <button onclick="closeModal('playModal')" class="text-2xl text-slate-400">✕</button>
+        <button onclick="closeModal('playModal')" class="text-2xl text-slate-400 hover:text-pink-600">✕</button>
     </div>
     <div id="playContent" class="mt-5"></div>
 </div>
@@ -635,46 +728,46 @@ input:focus,select:focus,textarea:focus { border-color:#08bfd0; }
 
 const sampleGames = [
     {
-        id:'sample1',
-        title:'Thử tài Toán học',
-        subject:'Toán học',
-        grade:'Lớp 4',
-        type:'quiz',
-        description:'Cùng chinh phục những câu hỏi Toán học thú vị!',
-        icon:'🧮',
-        author:'Đại Dương Tri Thức',
-        plays:120,
-        question:'Kết quả của 25 × 4 là bao nhiêu?',
-        options:['80','90','100','120'],
-        correct:2
+        id: 'sample1',
+        title: 'Thử tài Toán học',
+        subject: 'Toán học',
+        grade: 'Lớp 4',
+        type: 'quiz',
+        description: 'Cùng chinh phục những câu hỏi Toán học thú vị!',
+        icon: '🧮',
+        author: 'Đại Dương Tri Thức',
+        plays: 120,
+        question: 'Kết quả của 25 × 4 là bao nhiêu?',
+        options: ['80', '90', '100', '120'],
+        correct: 2
     },
     {
-        id:'sample2',
-        title:'Khám phá Tiếng Việt',
-        subject:'Tiếng Việt',
-        grade:'Lớp 4',
-        type:'quiz',
-        description:'Khám phá thế giới từ ngữ và câu văn.',
-        icon:'📚',
-        author:'Đại Dương Tri Thức',
-        plays:85,
-        question:'Từ nào sau đây là danh từ?',
-        options:['Chạy','Xinh đẹp','Học sinh','Nhanh chóng'],
-        correct:2
+        id: 'sample2',
+        title: 'Khám phá Tiếng Việt',
+        subject: 'Tiếng Việt',
+        grade: 'Lớp 4',
+        type: 'quiz',
+        description: 'Khám phá thế giới từ ngữ và câu văn.',
+        icon: '📚',
+        author: 'Đại Dương Tri Thức',
+        plays: 85,
+        question: 'Từ nào sau đây là danh từ?',
+        options: ['Chạy', 'Xinh đẹp', 'Học sinh', 'Nhanh chóng'],
+        correct: 2
     },
     {
-        id:'sample3',
-        title:'Nhà thám hiểm đại dương',
-        subject:'Khoa học',
-        grade:'Lớp 4',
-        type:'quiz',
-        description:'Cùng tìm hiểu thế giới tự nhiên.',
-        icon:'🐠',
-        author:'Đại Dương Tri Thức',
-        plays:96,
-        question:'Động vật nào sau đây sống dưới nước?',
-        options:['Con mèo','Cá heo','Con gà','Con thỏ'],
-        correct:1
+        id: 'sample3',
+        title: 'Nhà thám hiểm đại dương',
+        subject: 'Khoa học',
+        grade: 'Lớp 4',
+        type: 'quiz',
+        description: 'Cùng tìm hiểu thế giới tự nhiên.',
+        icon: '🪼',
+        author: 'Đại Dương Tri Thức',
+        plays: 96,
+        question: 'Động vật nào sau đây sống dưới nước?',
+        options: ['Con mèo', 'Cá heo', 'Con gà', 'Con thỏ'],
+        correct: 1
     }
 ];
 
@@ -685,8 +778,8 @@ let favorites = JSON.parse(localStorage.getItem('oceanFavorites') || '[]');
 
 try {
     const saved = JSON.parse(localStorage.getItem('oceanGames') || '[]');
-    games = [...sampleGames,...saved];
-} catch(e) {
+    games = [...sampleGames, ...saved];
+} catch (e) {
     games = [...sampleGames];
 }
 
@@ -700,8 +793,7 @@ function renderGames() {
     const subject = document.getElementById('subjectFilter').value;
 
     let filtered = games.filter(game => {
-        const text = (game.title+' '+game.subject+' '+game.author+' '+game.description).toLowerCase();
-
+        const text = (game.title + ' ' + game.subject + ' ' + game.author + ' ' + game.description).toLowerCase();
         const matchSearch = text.includes(keyword);
         const matchSubject = !subject || game.subject === subject;
         const matchType = !activeFilter ||
@@ -712,7 +804,7 @@ function renderGames() {
 
     grid.innerHTML = '';
 
-    document.getElementById('emptyGames').classList.toggle('hidden',filtered.length > 0);
+    document.getElementById('emptyGames').classList.toggle('hidden', filtered.length > 0);
     document.getElementById('gameCount').textContent = games.length;
 
     filtered.forEach(game => {
@@ -722,19 +814,19 @@ function renderGames() {
         card.className = 'ocean-card overflow-hidden';
 
         card.innerHTML = `
-            <div class="h-40 bg-gradient-to-br from-cyan-200 via-sky-300 to-blue-400 flex items-center justify-center relative">
+            <div class="h-40 bg-gradient-to-br from-pink-300 via-fuchsia-400 to-purple-600 flex items-center justify-center relative">
                 <div class="text-7xl drop-shadow-lg">${game.icon || '🎮'}</div>
-                <span class="absolute top-3 left-3 bg-white/90 rounded-full px-3 py-1 text-xs font-black text-sky-800">${game.subject}</span>
-                <button class="absolute top-3 right-3 bg-white rounded-full w-9 h-9 text-lg" onclick="toggleFavorite('${game.id}')">${favorite?'❤️':'🤍'}</button>
+                <span class="absolute top-3 left-3 bg-white/95 rounded-full px-3 py-1 text-xs font-black text-purple-900">${escapeHTML(game.subject)}</span>
+                <button class="absolute top-3 right-3 bg-white rounded-full w-9 h-9 text-lg shadow" onclick="toggleFavorite('${game.id}')">${favorite ? '❤️' : '🤍'}</button>
             </div>
             <div class="p-5">
                 <div class="flex justify-between items-center gap-2">
-                    <span class="tag">${game.grade}</span>
-                    <span class="text-xs text-slate-400 font-bold">${game.plays || 0} lượt chơi</span>
+                    <span class="tag">${escapeHTML(game.grade)}</span>
+                    <span class="text-xs text-purple-600 font-bold">${game.plays || 0} lượt chơi</span>
                 </div>
-                <h3 class="text-xl font-bold text-sky-950 mt-3">${escapeHTML(game.title)}</h3>
-                <p class="text-sm text-slate-500 font-bold mt-2 min-h-[40px]">${escapeHTML(game.description || '')}</p>
-                <div class="text-xs text-slate-400 font-bold mt-3">✍️ ${escapeHTML(game.author || 'Giáo viên')}</div>
+                <h3 class="text-xl font-bold text-purple-950 mt-3">${escapeHTML(game.title)}</h3>
+                <p class="text-sm text-purple-800/75 font-bold mt-2 min-h-[40px]">${escapeHTML(game.description || '')}</p>
+                <div class="text-xs text-purple-500 font-bold mt-3">✍️ ${escapeHTML(game.author || 'Giáo viên')}</div>
                 <button onclick="playGame('${game.id}')" class="ocean-button w-full py-3 mt-4 font-black">
                     Chơi ngay <i class="fa-solid fa-arrow-right ml-2"></i>
                 </button>
@@ -747,7 +839,7 @@ function renderGames() {
 
 function escapeHTML(value) {
     return String(value ?? '').replace(/[&<>"']/g, c => ({
-        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     })[c]);
 }
 
@@ -758,21 +850,21 @@ function filterType(type) {
 
 function chooseSubject(subject) {
     document.getElementById('subjectFilter').value = subject;
-    document.getElementById('games').scrollIntoView({behavior:'smooth'});
+    document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
     renderGames();
 }
 
 function toggleFavorite(id) {
     favorites = favorites.includes(id)
         ? favorites.filter(x => x !== id)
-        : [...favorites,id];
+        : [...favorites, id];
 
-    localStorage.setItem('oceanFavorites',JSON.stringify(favorites));
+    localStorage.setItem('oceanFavorites', JSON.stringify(favorites));
     renderGames();
 }
 
-document.getElementById('searchInput').addEventListener('input',renderGames);
-document.getElementById('subjectFilter').addEventListener('change',renderGames);
+document.getElementById('searchInput').addEventListener('input', renderGames);
+document.getElementById('subjectFilter').addEventListener('change', renderGames);
 
 // ========================================
 // TẠO TRÒ CHƠI
@@ -786,29 +878,34 @@ function closeModal(id) {
     document.getElementById(id).classList.remove('active');
 }
 
-document.getElementById('newType').addEventListener('change',function() {
-    document.getElementById('questionBuilder').style.display =
-        this.value === 'quiz' ? 'block' : 'none';
+document.getElementById('newType').addEventListener('change', function () {
+    const isQuiz = this.value === 'quiz';
+    document.getElementById('questionBuilder').style.display = isQuiz ? 'block' : 'none';
+    document.getElementById('questionText').required = isQuiz;
+    document.getElementById('optionA').required = isQuiz;
+    document.getElementById('optionB').required = isQuiz;
+    document.getElementById('optionC').required = isQuiz;
+    document.getElementById('optionD').required = isQuiz;
 });
 
-document.getElementById('createForm').addEventListener('submit',function(e) {
+document.getElementById('createForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
     const type = document.getElementById('newType').value;
 
     const game = {
-        id:'game_'+Date.now(),
-        title:document.getElementById('newTitle').value.trim(),
-        subject:document.getElementById('newSubject').value,
-        grade:document.getElementById('newGrade').value,
-        type:type,
-        description:document.getElementById('newDescription').value.trim(),
-        author:'Giáo viên',
-        plays:0,
-        icon:type === 'quiz' ? '📝' : '🎡'
+        id: 'game_' + Date.now(),
+        title: document.getElementById('newTitle').value.trim(),
+        subject: document.getElementById('newSubject').value,
+        grade: document.getElementById('newGrade').value,
+        type: type,
+        description: document.getElementById('newDescription').value.trim(),
+        author: 'Giáo viên',
+        plays: 0,
+        icon: type === 'quiz' ? '📝' : '🎡'
     };
 
-    if(type === 'quiz') {
+    if (type === 'quiz') {
         game.question = document.getElementById('questionText').value.trim();
         game.options = [
             document.getElementById('optionA').value.trim(),
@@ -824,17 +921,18 @@ document.getElementById('createForm').addEventListener('submit',function(e) {
     renderGames();
 
     this.reset();
+    document.getElementById('questionBuilder').style.display = 'block';
     closeModal('creatorModal');
 
-    document.getElementById('games').scrollIntoView({behavior:'smooth'});
+    document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
 
-    if(window.confetti) confetti({particleCount:100,spread:70,origin:{y:.7}});
+    if (window.confetti) confetti({ particleCount: 100, spread: 70, origin: { y: 0.7 } });
     alert('🎉 Đã tạo trò chơi thành công trên trình duyệt này!');
 });
 
 function saveGames() {
     const customGames = games.filter(g => !String(g.id).startsWith('sample'));
-    localStorage.setItem('oceanGames',JSON.stringify(customGames));
+    localStorage.setItem('oceanGames', JSON.stringify(customGames));
 }
 
 // ========================================
@@ -843,90 +941,92 @@ function saveGames() {
 
 function playGame(id) {
     currentGame = games.find(g => g.id === id);
-    if(!currentGame) return;
+    if (!currentGame) return;
 
     currentGame.plays = (currentGame.plays || 0) + 1;
     saveGames();
+    renderGames();
 
     const content = document.getElementById('playContent');
 
-    if(currentGame.type === 'wheel') {
+    if (currentGame.type === 'wheel') {
         content.innerHTML = `
-            <h2 class="text-2xl font-bold text-sky-900 text-center">${escapeHTML(currentGame.title)}</h2>
-            <div class="text-8xl text-center my-8" id="wheelIcon">🎡</div>
-            <p class="text-center text-slate-500 font-bold">Nhấn nút để quay vòng may mắn!</p>
+            <h2 class="text-2xl font-bold text-purple-950 text-center">${escapeHTML(currentGame.title)}</h2>
+            <div class="text-8xl text-center my-8 transition-transform duration-700" id="wheelIcon">🎡</div>
+            <p class="text-center text-purple-700 font-bold">Nhấn nút để quay vòng may mắn!</p>
             <button class="ocean-button w-full py-4 font-black mt-5" onclick="spinWheel()">QUAY NGAY!</button>
-            <div id="wheelResult" class="text-center text-xl font-black text-cyan-700 mt-5"></div>
+            <div id="wheelResult" class="text-center text-xl font-black text-pink-600 mt-5"></div>
         `;
     } else {
+        const labels = ['A', 'B', 'C', 'D'];
         content.innerHTML = `
             <div class="text-center">
                 <span class="section-label">${escapeHTML(currentGame.subject)}</span>
-                <h2 class="text-2xl font-bold text-sky-950 mt-4">${escapeHTML(currentGame.title)}</h2>
-                <div class="text-sm text-slate-400 font-bold mt-2">Câu hỏi thử thách</div>
-                <p class="text-xl font-black text-sky-900 mt-5">${escapeHTML(currentGame.question || '')}</p>
+                <h2 class="text-2xl font-bold text-purple-950 mt-4">${escapeHTML(currentGame.title)}</h2>
+                <div class="text-sm text-purple-500 font-bold mt-2">Câu hỏi thử thách</div>
+                <p class="text-xl font-black text-purple-950 mt-5">${escapeHTML(currentGame.question || '')}</p>
             </div>
-            <div class="grid grid-cols-1 gap-3 mt-6">
-                ${(currentGame.options || []).map((option,index) =>
-                    `<button class="game-option text-left" onclick="answerQuestion(${index},this)">
-                    ${String.fromCharCode(65+index)}. ${escapeHTML(option)}
+            <div class="grid grid-cols-1 gap-3 mt-6" id="optionsContainer">
+                ${(currentGame.options || []).map((option, index) =>
+                    `<button class="game-option text-left" onclick="answerQuestion(${index}, this)">
+                        <span class="inline-block w-7 h-7 rounded-full bg-fuchsia-100 text-purple-900 text-center leading-7 mr-2 font-black">${labels[index]}</span>
+                        ${escapeHTML(option)}
                     </button>`
                 ).join('')}
             </div>
-            <div id="answerResult" class="text-center font-black text-lg mt-5"></div>
+            <div id="quizFeedback" class="text-center font-black text-lg mt-5"></div>
         `;
     }
 
     document.getElementById('playModal').classList.add('active');
-    renderGames();
 }
 
-function answerQuestion(index,button) {
-    const options = document.querySelectorAll('.game-option');
-    options.forEach(option => option.disabled = true);
+function answerQuestion(selectedIndex, btn) {
+    if (!currentGame) return;
+    const allButtons = document.querySelectorAll('#optionsContainer .game-option');
+    allButtons.forEach(b => b.disabled = true);
 
-    const result = document.getElementById('answerResult');
+    const feedback = document.getElementById('quizFeedback');
 
-    if(index === currentGame.correct) {
-        button.classList.add('correct');
-        result.innerHTML = '🎉 Chính xác! Bạn thật tuyệt vời!';
-        result.style.color = '#15966a';
-
-        if(window.confetti) confetti({particleCount:100,spread:80,origin:{y:.7}});
+    if (selectedIndex === currentGame.correct) {
+        btn.classList.add('correct');
+        feedback.innerHTML = '🎉 Tuyệt vời! Câu trả lời hoàn toàn chính xác!';
+        feedback.className = 'text-center font-black text-lg mt-5 text-emerald-600';
+        if (window.confetti) confetti({ particleCount: 90, spread: 65, origin: { y: 0.7 } });
     } else {
-        button.classList.add('wrong');
-        if(options[currentGame.correct]) options[currentGame.correct].classList.add('correct');
-        result.innerHTML = '💙 Chưa chính xác. Hãy thử lại ở trò chơi tiếp theo nhé!';
-        result.style.color = '#d15c78';
+        btn.classList.add('wrong');
+        if (allButtons[currentGame.correct]) {
+            allButtons[currentGame.correct].classList.add('correct');
+        }
+        feedback.innerHTML = '🫧 Tiếc quá! Cùng xem đáp án đúng màu xanh nhé!';
+        feedback.className = 'text-center font-black text-lg mt-5 text-rose-600';
     }
 }
 
 function spinWheel() {
-    const icon = document.getElementById('wheelIcon');
+    const wheel = document.getElementById('wheelIcon');
     const result = document.getElementById('wheelResult');
-    const messages = ['Bạn nhận được 1 ngọc trai! 💎','Bạn là nhà thám hiểm xuất sắc! 🐳','Một thử thách mới đang chờ bạn! 🌊','Chúc mừng! Bạn đã chiến thắng! 🏆'];
+    const prizes = [
+        '🌟 +10 điểm Ngôi Sao Tri Thức!',
+        '🫧 Nhận 1 Ngọc Trai Hoàng Hôn!',
+        '👏 Một tràng pháo tay thật lớn!',
+        '🎁 Quyền chọn bạn cùng trả lời!',
+        '🐬 Cá heo Bọt Biển khen ngợi bạn!'
+    ];
 
-    icon.style.transition = 'transform 2s ease-out';
-    icon.style.transform = 'rotate(1080deg)';
+    const deg = 720 + Math.floor(Math.random() * 720);
+    wheel.style.transform = `rotate(${deg}deg)`;
+    result.textContent = 'Đang quay...';
 
     setTimeout(() => {
-        result.innerHTML = messages[Math.floor(Math.random()*messages.length)];
-        if(window.confetti) confetti({particleCount:80,spread:70});
-    },2000);
+        const chosen = prizes[Math.floor(Math.random() * prizes.length)];
+        result.textContent = chosen;
+        if (window.confetti) confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
+    }, 750);
 }
 
-// ========================================
-// KHỞI ĐỘNG
-// ========================================
-
+// Khởi chạy hiển thị ban đầu
 renderGames();
-
-document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('click',function(e) {
-        if(e.target === this) this.classList.remove('active');
-    });
-});
 </script>
-
 </body>
 </html>
