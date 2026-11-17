@@ -6,25 +6,18 @@
 <title>Đại Dương Tri Thức - Khám phá và chinh phục</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
-:root {
-    --pink-primary: #ec4899;
-    --purple-primary: #7e22ce;
-    --deep-ocean: #2e1065;
-    --text-main: #3b175c;
-}
-
 * { box-sizing: border-box; }
 
 body {
     margin: 0;
     font-family: 'Nunito', sans-serif;
-    color: var(--text-main);
-    background: linear-gradient(180deg, #ffe4ef 0%, #f5d0fe 22%, #d8b4fe 48%, #a855f7 76%, #581c87 100%);
+    color: #3b175c;
+    background: linear-gradient(180deg, #ffcde5 0%, #f0abfc 25%, #d8b4fe 50%, #c084fc 75%, #7e22ce 100%);
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
@@ -32,7 +25,7 @@ body {
 
 h1, h2, h3, .brand-font { font-family: 'Fredoka', sans-serif; }
 
-/* Bối cảnh biển hồng - tím cố định */
+/* Bối cảnh biển hoàng hôn hồng - tím lấp lánh */
 .ocean-backdrop {
     position: fixed;
     inset: 0;
@@ -43,990 +36,81 @@ h1, h2, h3, .brand-font { font-family: 'Fredoka', sans-serif; }
 
 .sun-ray {
     position: absolute;
-    top: -15%;
-    width: 140px;
-    height: 130%;
-    background: linear-gradient(180deg, rgba(255, 241, 248, 0.45) 0%, rgba(253, 186, 226, 0.12) 60%, transparent 100%);
-    transform: rotate(18deg);
-    animation: raySway 9s ease-in-out infinite alternate;
+    top: -20%;
+    width: 160px;
+    height: 140%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(253, 186, 226, 0.2) 60%, transparent 100%);
+    transform: rotate(20deg);
+    animation: raySway 8s ease-in-out infinite alternate;
 }
 
 @keyframes raySway {
-    0% { transform: rotate(14deg) translateX(-15px); opacity: 0.65; }
-    100% { transform: rotate(22deg) translateX(20px); opacity: 0.95; }
+    0% { transform: rotate(15deg) translateX(-20px); opacity: 0.6; }
+    100% { transform: rotate(25deg) translateX(25px); opacity: 0.9; }
 }
 
 .bg-bubble {
     position: absolute;
-    bottom: -40px;
+    bottom: -50px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(244,114,182,0.25) 65%, rgba(168,85,247,0.35));
-    border: 1.5px solid rgba(255,255,255,0.75);
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(244,114,182,0.3) 65%, rgba(168,85,247,0.4));
+    border: 2px solid rgba(255,255,255,0.8);
     animation: riseUp linear infinite;
 }
 
 @keyframes riseUp {
-    0% { transform: translateY(0) scale(0.85); opacity: 0; }
-    15% { opacity: 0.85; }
-    85% { opacity: 0.7; }
-    100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    20% { opacity: 0.9; }
+    80% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) scale(1.15); opacity: 0; }
 }
 
 .jellyfish-float {
     position: absolute;
-    font-size: 36px;
-    filter: drop-shadow(0 0 12px rgba(244, 114, 182, 0.75));
-    animation: jellyDrift 8s ease-in-out infinite;
+    font-size: 40px;
+    filter: drop-shadow(0 0 15px rgba(255, 192, 230, 0.9));
+    animation: jellyDrift 7s ease-in-out infinite;
 }
 
 @keyframes jellyDrift {
-    0%, 100% { transform: translateY(0) rotate(-6deg); }
-    50% { transform: translateY(-25px) rotate(6deg); }
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-30px) rotate(8deg); }
 }
 
-/* Chữ bong bóng 3D cho tên trang web */
+/* Chữ bong bóng 3D cực nổi và bắt mắt cho tên trang web */
 .bubble-logo-text {
     font-family: 'Baloo 2', cursive;
     font-weight: 800;
+    font-size: 26px;
     letter-spacing: 0.5px;
-    background: linear-gradient(180deg, #ffffff 0%, #fbcfe8 38%, #ec4899 72%, #7e22ce 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #ffe4e6 30%, #f472b6 65%, #9333ea 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1.5px #ffffff;
+    -webkit-text-stroke: 2px #ffffff;
     filter:
-        drop-shadow(0 2px 0 #9d174d)
-        drop-shadow(0 4px 0 #581c87)
-        drop-shadow(0 6px 10px rgba(126, 34, 206, 0.35));
+        drop-shadow(0 2px 0 #be185d)
+        drop-shadow(0 4px 0 #6b21a8)
+        drop-shadow(0 6px 12px rgba(147, 51, 234, 0.45));
     position: relative;
     display: inline-block;
+    line-height: 1.1;
 }
 
 .glass {
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(16px);
-    border: 2px solid rgba(255, 255, 255, 0.95);
-    box-shadow: 0 12px 30px rgba(126, 34, 206, 0.14);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    border: 2.5px solid rgba(255, 255, 255, 1);
+    box-shadow: 0 15px 35px rgba(107, 33, 168, 0.2);
 }
 
 .ocean-button {
-    background: linear-gradient(135deg, #f43f5e, #d946ef 55%, #7e22ce);
+    background: linear-gradient(135deg, #fb7185, #ec4899 50%, #9333ea);
     color: white;
-    border-radius: 17px;
-    box-shadow: 0 5px 0 #6b21a8, 0 12px 22px rgba(168, 85, 247, 0.28);
+    border-radius: 18px;
+    box-shadow: 0 6px 0 #701a75, 0 12px 25px rgba(236, 72, 153, 0.35);
     transition: .2s;
 }
 
 .ocean-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 0 #6b21a8, 0 15px 25px rgba(168, 85, 247, 0.35);
-}
-
-.white-button {
-    background: white;
-    border: 2px solid #f5d0fe;
-    color: #86198f;
-    border-radius: 16px;
-    transition: .2s;
-}
-
-.white-button:hover {
-    background: #fdf4ff;
-    border-color: #e879f9;
-}
-
-.ocean-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(253,244,255,0.92));
-    border: 2px solid white;
-    border-radius: 25px;
-    box-shadow: 0 12px 28px rgba(107, 33, 168, 0.15);
-    transition: .25s;
-}
-
-.ocean-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 35px rgba(126, 34, 206, 0.24);
-}
-
-.hero-bg {
-    background: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #7e22ce 100%);
-    position: relative;
-    overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.55);
-}
-
-.hero-bg:before, .hero-bg:after {
-    content: "";
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.14);
-}
-
-.hero-bg:before { top: -150px; left: -60px; }
-.hero-bg:after { bottom: -190px; right: -40px; }
-
-.bubble {
-    position: absolute;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 50%;
-    animation: float 6s ease-in-out infinite;
-    pointer-events: none;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-22px); }
-}
-
-.fish {
-    animation: swim 4s ease-in-out infinite;
-}
-
-@keyframes swim {
-    0%, 100% { transform: translateX(0) rotate(-4deg); }
-    50% { transform: translateX(12px) rotate(4deg); }
-}
-
-.wave {
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 55px;
-    background: rgba(255, 255, 255, 0.26);
-    border-radius: 50% 50% 0 0;
-}
-
-.nav-link {
-    padding: 10px 15px;
-    border-radius: 14px;
-    font-weight: 900;
-    color: #6b21a8;
-    white-space: nowrap;
-    transition: .2s;
-}
-
-.nav-link:hover { background: #fae8ff; color: #be185d; }
-
-.section-label {
-    display: inline-block;
-    padding: 7px 16px;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.88);
-    color: #9d174d;
-    font-weight: 900;
-    font-size: 12px;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 12px rgba(157, 23, 77, 0.12);
-}
-
-.modal {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background: rgba(46, 16, 101, 0.72);
-    backdrop-filter: blur(4px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    overflow-y: auto;
-}
-
-.modal.active { display: flex; }
-
-.modal-box {
-    background: white;
-    width: 100%;
-    max-width: 650px;
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: 28px;
-    padding: 25px;
-    box-shadow: 0 25px 70px rgba(46, 16, 101, 0.35);
-    border: 3px solid #f5d0fe;
-}
-
-input, select, textarea {
-    width: 100%;
-    border: 2px solid #f3e8ff;
-    border-radius: 13px;
-    padding: 12px;
-    outline: none;
-    font-family: 'Nunito', sans-serif;
-    color: #3b175c;
-}
-
-input:focus, select:focus, textarea:focus { border-color: #d946ef; }
-
-.game-option {
-    border: 2px solid #f3e8ff;
-    border-radius: 15px;
-    padding: 14px;
-    cursor: pointer;
-    transition: .2s;
-    font-weight: 800;
-    background: white;
-    color: #3b175c;
-}
-
-.game-option:hover { background: #fdf4ff; border-color: #d946ef; }
-.game-option.correct { background: #d5f8e7; border-color: #27b777; color: #087b50; }
-.game-option.wrong { background: #ffe2e8; border-color: #ed7991; color: #b83254; }
-
-.tag {
-    display: inline-block;
-    background: #fae8ff;
-    color: #86198f;
-    padding: 5px 12px;
-    border-radius: 30px;
-    font-size: 11px;
-    font-weight: 900;
-    transition: .2s;
-}
-
-.tag:hover { background: #f5d0fe; }
-
-@media(max-width: 768px) {
-    .desktop-nav { display: none; }
-    .hero-title { font-size: 36px !important; }
-}
-</style>
-</head>
-
-<body>
-
-<!-- NỀN BIỂN HOÀNG HÔN HỒNG - TÍM -->
-<div class="ocean-backdrop" aria-hidden="true">
-    <div class="sun-ray" style="left: 12%;"></div>
-    <div class="sun-ray" style="left: 42%; animation-delay: 2s;"></div>
-    <div class="sun-ray" style="left: 74%; animation-delay: 4s;"></div>
-
-    <div class="jellyfish-float" style="top: 18%; left: 6%;">🪼</div>
-    <div class="jellyfish-float" style="top: 52%; right: 5%; animation-delay: 3s;">🪼</div>
-    <div class="jellyfish-float" style="top: 76%; left: 14%; font-size: 28px; animation-delay: 1.5s;">🐠</div>
-    <div class="jellyfish-float" style="top: 34%; right: 12%; font-size: 28px; animation-delay: 4.5s;">🫧</div>
-
-    <div class="bg-bubble" style="left: 8%; width: 18px; height: 18px; animation-duration: 11s;"></div>
-    <div class="bg-bubble" style="left: 22%; width: 28px; height: 28px; animation-duration: 14s; animation-delay: 2s;"></div>
-    <div class="bg-bubble" style="left: 38%; width: 14px; height: 14px; animation-duration: 9s; animation-delay: 4s;"></div>
-    <div class="bg-bubble" style="left: 55%; width: 24px; height: 24px; animation-duration: 13s; animation-delay: 1s;"></div>
-    <div class="bg-bubble" style="left: 71%; width: 16px; height: 16px; animation-duration: 10s; animation-delay: 3s;"></div>
-    <div class="bg-bubble" style="left: 88%; width: 32px; height: 32px; animation-duration: 15s; animation-delay: 5s;"></div>
-</div>
-
-<!-- HEADER -->
-<header class="sticky top-0 z-50 px-3 py-3">
-<div class="max-w-7xl mx-auto glass rounded-3xl px-4 md:px-6 py-3 flex items-center justify-between gap-3">
-
-    <a href="#home" class="flex items-center gap-3 min-w-0">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-400 via-fuchsia-500 to-purple-700 flex items-center justify-center text-3xl shadow-lg border-2 border-white/80">
-            🐬
-        </div>
-        <div class="min-w-0">
-            <div class="bubble-logo-text text-xl md:text-2xl leading-tight">
-                ĐẠI DƯƠNG TRI THỨC
-            </div>
-            <div class="text-[9px] md:text-[10px] font-black tracking-widest text-fuchsia-800">
-                OCEAN OF KNOWLEDGE
-            </div>
-        </div>
-    </a>
-
-    <nav class="desktop-nav flex items-center gap-1">
-        <a class="nav-link" href="#home">Trang chủ</a>
-        <a class="nav-link" href="#games">Kho trò chơi</a>
-        <a class="nav-link" href="#worlds">Môn học</a>
-        <a class="nav-link" href="#workshop">Sáng tạo</a>
-        <a class="nav-link" href="#community">Cộng đồng</a>
-    </nav>
-
-    <button onclick="openCreator()" class="ocean-button px-4 py-3 font-black text-sm whitespace-nowrap">
-        <i class="fa-solid fa-plus mr-1"></i>
-        <span class="hidden sm:inline">Tạo trò chơi</span>
-        <span class="sm:hidden">Tạo mới</span>
-    </button>
-</div>
-</header>
-
-<!-- HERO -->
-<section id="home" class="relative z-10 px-4 pt-5 pb-12">
-<div class="max-w-7xl mx-auto hero-bg rounded-[35px] min-h-[420px] md:min-h-[460px] shadow-2xl p-7 md:p-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
-
-    <div class="relative z-10 text-center lg:text-left">
-        <div class="inline-flex bg-white/95 rounded-full px-5 py-2 text-xs md:text-sm font-black text-purple-900 mb-5 shadow">
-            🌅 CHÀO MỪNG ĐẾN VỚI ĐẠI DƯƠNG HOÀNG HÔN
-        </div>
-
-        <h1 class="hero-title text-5xl md:text-6xl font-bold text-white leading-tight drop-shadow-lg">
-            KHÁM PHÁ<br>
-            ĐẠI DƯƠNG
-            <span class="block text-amber-200">CHINH PHỤC TRI THỨC!</span>
-        </h1>
-
-        <p class="text-white text-base md:text-lg font-bold mt-5 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            Nơi thầy cô sáng tạo trò chơi, học sinh khám phá kiến thức và cùng nhau mở ra hàng ngàn điều kỳ thú dưới biển hoàng hôn hồng tím!
-        </p>
-
-        <div class="flex flex-wrap gap-4 justify-center lg:justify-start mt-7">
-            <a href="#games" class="bg-white text-purple-900 px-7 py-4 rounded-2xl font-black shadow-xl hover:-translate-y-1 transition">
-                <i class="fa-solid fa-compass mr-2 text-pink-600"></i>Khám phá ngay
-            </a>
-            <button onclick="openCreator()" class="bg-amber-300 text-purple-950 px-7 py-4 rounded-2xl font-black shadow-xl hover:-translate-y-1 transition">
-                <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Thầy cô sáng tạo
-            </button>
-        </div>
-
-        <div class="flex flex-wrap gap-5 justify-center lg:justify-start mt-7 text-white text-sm font-black">
-            <span>🎮 Kho trò chơi</span>
-            <span>🧑‍🏫 Cộng đồng giáo viên</span>
-            <span>✨ Chia sẻ tri thức</span>
-        </div>
-    </div>
-
-    <div class="relative z-10 flex justify-center items-center min-h-[270px]">
-        <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-pink-200/30 rounded-full blur-xl"></div>
-
-        <div class="relative text-center">
-            <div class="text-9xl md:text-[150px] fish drop-shadow-2xl">🐬</div>
-            <div class="absolute -top-5 -right-10 text-5xl fish">🪼</div>
-            <div class="absolute top-20 -left-12 text-4xl">🐢</div>
-            <div class="absolute bottom-0 -right-12 text-4xl">🐙</div>
-            <div class="absolute -bottom-8 left-0 text-4xl">🐚</div>
-            <div class="bg-white/95 rounded-2xl px-5 py-3 shadow-xl mt-3 border-2 border-pink-200">
-                <div class="font-black text-purple-950">Xin chào! Mình là Bọt Biển</div>
-                <div class="text-xs font-bold text-pink-600">Người bạn đồng hành của bạn 🫧</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bubble w-12 h-12 top-10 right-20"></div>
-    <div class="bubble w-7 h-7 bottom-20 left-1/2"></div>
-    <div class="bubble w-16 h-16 top-1/2 left-5"></div>
-    <div class="wave"></div>
-</div>
-</section>
-
-<!-- QUICK STATS -->
-<section class="relative z-10 px-4 -mt-3">
-<div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
-    <div class="glass rounded-2xl p-4 text-center">
-        <div class="text-3xl">🎮</div>
-        <div class="text-2xl font-black text-purple-900" id="gameCount">3</div>
-        <div class="text-xs font-bold text-purple-700">Trò chơi</div>
-    </div>
-    <div class="glass rounded-2xl p-4 text-center">
-        <div class="text-3xl">📚</div>
-        <div class="text-2xl font-black text-purple-900">4</div>
-        <div class="text-xs font-bold text-purple-700">Vùng biển</div>
-    </div>
-    <div class="glass rounded-2xl p-4 text-center">
-        <div class="text-3xl">🧑‍🏫</div>
-        <div class="text-2xl font-black text-purple-900">∞</div>
-        <div class="text-xs font-bold text-purple-700">Giáo viên sáng tạo</div>
-    </div>
-    <div class="glass rounded-2xl p-4 text-center">
-        <div class="text-3xl">🫧</div>
-        <div class="text-2xl font-black text-purple-900">100%</div>
-        <div class="text-xs font-bold text-purple-700">Niềm vui học tập</div>
-    </div>
-</div>
-</section>
-
-<!-- GAME LIBRARY -->
-<section id="games" class="relative z-10 py-16 px-4">
-<div class="max-w-7xl mx-auto">
-
-    <div class="text-center mb-9">
-        <span class="section-label">🎮 KHO BÁU TRI THỨC</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-purple-950 mt-3 drop-shadow-sm">KHO TRÒ CHƠI GIÁO DỤC</h2>
-        <p class="font-bold text-purple-900/80 mt-2">Chọn trò chơi và bắt đầu hành trình khám phá!</p>
-    </div>
-
-    <div class="glass rounded-3xl p-4 md:p-5 mb-7">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div class="md:col-span-2 relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-pink-600"></i>
-                <input id="searchInput" class="pl-11" placeholder="Tìm tên trò chơi, kiến thức, tác giả...">
-            </div>
-            <select id="subjectFilter">
-                <option value="">Tất cả môn học</option>
-                <option>Toán học</option>
-                <option>Tiếng Việt</option>
-                <option>Khoa học</option>
-                <option>Lịch sử & Địa lí</option>
-                <option>Tiếng Anh</option>
-                <option>Khác</option>
-            </select>
-        </div>
-
-        <div class="flex flex-wrap gap-2 mt-4">
-            <button class="tag cursor-pointer" onclick="filterType('')">Tất cả</button>
-            <button class="tag cursor-pointer" onclick="filterType('quiz')">Trắc nghiệm</button>
-            <button class="tag cursor-pointer" onclick="filterType('wheel')">Vòng quay</button>
-            <button class="tag cursor-pointer" onclick="filterType('match')">Ghép đôi</button>
-            <button class="tag cursor-pointer" onclick="filterType('favorite')">❤️ Yêu thích</button>
-        </div>
-    </div>
-
-    <div id="gameGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-
-    <div id="emptyGames" class="hidden text-center py-12 glass rounded-3xl">
-        <div class="text-6xl">🐚</div>
-        <h3 class="text-2xl font-bold text-purple-950 mt-3">Chưa tìm thấy trò chơi</h3>
-        <p class="text-purple-700 font-bold mt-2">Hãy thử từ khóa khác nhé!</p>
-    </div>
-
-</div>
-</section>
-
-<!-- SUBJECT WORLDS -->
-<section id="worlds" class="relative z-10 py-16 px-4 bg-white/30 backdrop-blur-sm">
-<div class="max-w-7xl mx-auto">
-
-    <div class="text-center mb-10">
-        <span class="section-label">🌊 THẾ GIỚI KỲ THÚ</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-purple-950 mt-3">BỐN VÙNG BIỂN MÔN HỌC</h2>
-        <p class="font-bold text-purple-900/80 mt-2">Mỗi vùng biển là một hành trình khám phá mới!</p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <div class="ocean-card p-6 text-center">
-            <div class="text-6xl mb-4">🧮</div>
-            <h3 class="text-2xl font-bold text-purple-950">Đảo Toán Học</h3>
-            <p class="text-sm font-bold text-purple-800/75 mt-2">Phép tính, hình học và những thử thách tư duy.</p>
-            <button onclick="chooseSubject('Toán học')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
-        </div>
-
-        <div class="ocean-card p-6 text-center">
-            <div class="text-6xl mb-4">📚</div>
-            <h3 class="text-2xl font-bold text-purple-950">Vịnh Ngôn Ngữ</h3>
-            <p class="text-sm font-bold text-purple-800/75 mt-2">Từ vựng, đọc hiểu và thế giới văn học.</p>
-            <button onclick="chooseSubject('Tiếng Việt')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
-        </div>
-
-        <div class="ocean-card p-6 text-center">
-            <div class="text-6xl mb-4">🪸</div>
-            <h3 class="text-2xl font-bold text-purple-950">Rạn San Hô</h3>
-            <p class="text-sm font-bold text-purple-800/75 mt-2">Khoa học, tự nhiên và thế giới sinh vật.</p>
-            <button onclick="chooseSubject('Khoa học')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
-        </div>
-
-        <div class="ocean-card p-6 text-center">
-            <div class="text-6xl mb-4">🗺️</div>
-            <h3 class="text-2xl font-bold text-purple-950">Vùng Biển Khám Phá</h3>
-            <p class="text-sm font-bold text-purple-800/75 mt-2">Lịch sử, địa lí và hành trình quê hương.</p>
-            <button onclick="chooseSubject('Lịch sử & Địa lí')" class="white-button px-5 py-2 mt-5 font-black">Khám phá →</button>
-        </div>
-
-    </div>
-</div>
-</section>
-
-<!-- WORKSHOP -->
-<section id="workshop" class="relative z-10 py-16 px-4">
-<div class="max-w-7xl mx-auto">
-    <div class="hero-bg rounded-[32px] p-7 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center shadow-xl">
-
-        <div class="text-center md:text-left">
-            <span class="bg-white/95 text-purple-900 px-4 py-2 rounded-full text-xs font-black">✨ DÀNH CHO GIÁO VIÊN</span>
-            <h2 class="text-4xl md:text-5xl font-bold text-white mt-5">XƯỞNG SÁNG TẠO</h2>
-            <p class="text-white font-bold mt-4 leading-relaxed">
-                Biến ý tưởng bài học thành trò chơi sinh động. Thầy cô có thể tự tạo, lưu và chia sẻ những trò chơi của mình!
-            </p>
-            <button onclick="openCreator()" class="bg-amber-300 text-purple-950 px-7 py-4 rounded-2xl font-black mt-7 shadow-xl hover:-translate-y-1 transition">
-                <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Bắt đầu sáng tạo
-            </button>
-        </div>
-
-        <div class="flex justify-center gap-4 flex-wrap">
-            <div class="bg-white rounded-3xl p-5 text-center shadow-xl w-36 rotate-[-5deg]">
-                <div class="text-5xl">📝</div>
-                <div class="font-black text-purple-950 mt-3">Trắc nghiệm</div>
-            </div>
-            <div class="bg-white rounded-3xl p-5 text-center shadow-xl w-36 rotate-[5deg]">
-                <div class="text-5xl">🎡</div>
-                <div class="font-black text-purple-950 mt-3">Vòng quay</div>
-            </div>
-            <div class="bg-white rounded-3xl p-5 text-center shadow-xl w-36 rotate-[-3deg]">
-                <div class="text-5xl">🧩</div>
-                <div class="font-black text-purple-950 mt-3">Ghép đôi</div>
-            </div>
-        </div>
-    </div>
-</div>
-</section>
-
-<!-- COMMUNITY -->
-<section id="community" class="relative z-10 py-16 px-4 bg-white/30 backdrop-blur-sm">
-<div class="max-w-7xl mx-auto">
-    <div class="text-center mb-9">
-        <span class="section-label">🧑‍🏫 KẾT NỐI VÀ CHIA SẺ</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-white drop-shadow mt-3">CỘNG ĐỒNG GIÁO VIÊN</h2>
-        <p class="font-bold text-pink-100 mt-2">Mỗi ý tưởng là một viên ngọc quý của đại dương tri thức.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="ocean-card p-7 text-center">
-            <div class="text-5xl">🌟</div>
-            <h3 class="text-xl font-bold mt-3 text-purple-950">Chia sẻ sáng tạo</h3>
-            <p class="text-sm text-purple-800/75 font-bold mt-2">Cùng chia sẻ trò chơi và ý tưởng dạy học.</p>
-        </div>
-        <div class="ocean-card p-7 text-center">
-            <div class="text-5xl">💎</div>
-            <h3 class="text-xl font-bold mt-3 text-purple-950">Kho báu chung</h3>
-            <p class="text-sm text-purple-800/75 font-bold mt-2">Khám phá những sản phẩm giáo dục hữu ích.</p>
-        </div>
-        <div class="ocean-card p-7 text-center">
-            <div class="text-5xl">🤝</div>
-            <h3 class="text-xl font-bold mt-3 text-purple-950">Cùng phát triển</h3>
-            <p class="text-sm text-purple-800/75 font-bold mt-2">Sao chép trò chơi và phát triển ý tưởng riêng.</p>
-        </div>
-    </div>
-</div>
-</section>
-
-<!-- RESOURCE LIBRARY -->
-<section class="relative z-10 py-14 px-4">
-<div class="max-w-7xl mx-auto glass rounded-[30px] p-7 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
-    <div>
-        <span class="section-label">📚 GÓC TÀI NGUYÊN</span>
-        <h2 class="text-3xl font-bold text-purple-950 mt-3">THƯ VIỆN HỌC LIỆU</h2>
-        <p class="font-bold text-purple-800/80 mt-2">Nơi lưu giữ những tài liệu, hình ảnh và ý tưởng dạy học hữu ích.</p>
-    </div>
-    <div class="text-7xl">📖🪸</div>
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer class="relative z-10 bg-purple-950/90 text-white px-5 py-10 border-t border-pink-400/30">
-<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div>
-        <div class="bubble-logo-text text-2xl">ĐẠI DƯƠNG TRI THỨC</div>
-        <p class="text-pink-200 text-sm font-bold mt-3">Khám phá đại dương – Chinh phục tri thức!</p>
-    </div>
-    <div>
-        <h3 class="font-black text-lg mb-3 text-pink-200">Khám phá</h3>
-        <div class="text-sm text-purple-200 space-y-2">
-            <p><a href="#games" class="hover:text-white">Kho trò chơi</a></p>
-            <p><a href="#worlds" class="hover:text-white">Các môn học</a></p>
-            <p><a href="#workshop" class="hover:text-white">Xưởng sáng tạo</a></p>
-        </div>
-    </div>
-    <div>
-        <h3 class="font-black text-lg mb-3 text-pink-200">Thông điệp</h3>
-        <p class="text-sm text-purple-200">Một đại dương – Ngàn khám phá – Vạn niềm vui học tập!</p>
-    </div>
-</div>
-<div class="text-center text-xs text-pink-300/80 mt-9 border-t border-purple-800 pt-5">
-    © 2026 Đại Dương Tri Thức. Cùng nhau lan tỏa tri thức.
-</div>
-</footer>
-
-<!-- CREATE GAME MODAL -->
-<div id="creatorModal" class="modal">
-<div class="modal-box">
-    <div class="flex justify-between items-center mb-5">
-        <div>
-            <span class="section-label">✨ XƯỞNG SÁNG TẠO</span>
-            <h2 class="text-2xl font-bold text-purple-950 mt-2">Tạo trò chơi mới</h2>
-        </div>
-        <button onclick="closeModal('creatorModal')" class="text-2xl text-slate-400 hover:text-pink-600">✕</button>
-    </div>
-
-    <form id="createForm" class="space-y-4">
-        <div>
-            <label class="font-black text-sm">Tên trò chơi</label>
-            <input id="newTitle" required placeholder="Ví dụ: Thử tài Toán học">
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-                <label class="font-black text-sm">Môn học</label>
-                <select id="newSubject">
-                    <option>Toán học</option>
-                    <option>Tiếng Việt</option>
-                    <option>Khoa học</option>
-                    <option>Lịch sử & Địa lí</option>
-                    <option>Tiếng Anh</option>
-                    <option>Khác</option>
-                </select>
-            </div>
-            <div>
-                <label class="font-black text-sm">Khối lớp</label>
-                <select id="newGrade">
-                    <option>Lớp 1</option>
-                    <option>Lớp 2</option>
-                    <option>Lớp 3</option>
-                    <option selected>Lớp 4</option>
-                    <option>Lớp 5</option>
-                    <option>Lớp 6–9</option>
-                    <option>Lớp 10–12</option>
-                    <option>Nhiều khối lớp</option>
-                </select>
-            </div>
-        </div>
-
-        <div>
-            <label class="font-black text-sm">Loại trò chơi</label>
-            <select id="newType">
-                <option value="quiz">Trắc nghiệm</option>
-                <option value="wheel">Vòng quay may mắn</option>
-            </select>
-        </div>
-
-        <div>
-            <label class="font-black text-sm">Mô tả</label>
-            <textarea id="newDescription" rows="2" placeholder="Giới thiệu ngắn về trò chơi..."></textarea>
-        </div>
-
-        <div id="questionBuilder">
-            <label class="font-black text-sm">Câu hỏi 1</label>
-            <input id="questionText" required placeholder="Nhập nội dung câu hỏi">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                <input id="optionA" required placeholder="Đáp án A">
-                <input id="optionB" required placeholder="Đáp án B">
-                <input id="optionC" required placeholder="Đáp án C">
-                <input id="optionD" required placeholder="Đáp án D">
-            </div>
-            <label class="font-black text-sm block mt-3">Đáp án đúng</label>
-            <select id="correctAnswer">
-                <option value="0">A</option>
-                <option value="1">B</option>
-                <option value="2">C</option>
-                <option value="3">D</option>
-            </select>
-        </div>
-
-        <p class="text-xs text-purple-600">Phiên bản thử nghiệm: mỗi trò chơi trắc nghiệm có một câu hỏi. Có thể bổ sung nhiều câu hỏi trong phiên bản tiếp theo.</p>
-
-        <button type="submit" class="ocean-button w-full py-4 font-black">
-            <i class="fa-solid fa-floppy-disk mr-2"></i>Lưu trò chơi
-        </button>
-    </form>
-</div>
-</div>
-
-<!-- PLAY MODAL -->
-<div id="playModal" class="modal">
-<div class="modal-box">
-    <div class="flex justify-between items-center">
-        <span class="section-label">🎮 THỬ THÁCH TRI THỨC</span>
-        <button onclick="closeModal('playModal')" class="text-2xl text-slate-400 hover:text-pink-600">✕</button>
-    </div>
-    <div id="playContent" class="mt-5"></div>
-</div>
-</div>
-
-<script>
-// ========================================
-// DỮ LIỆU TRÒ CHƠI MẪU
-// ========================================
-
-const sampleGames = [
-    {
-        id: 'sample1',
-        title: 'Thử tài Toán học',
-        subject: 'Toán học',
-        grade: 'Lớp 4',
-        type: 'quiz',
-        description: 'Cùng chinh phục những câu hỏi Toán học thú vị!',
-        icon: '🧮',
-        author: 'Đại Dương Tri Thức',
-        plays: 120,
-        question: 'Kết quả của 25 × 4 là bao nhiêu?',
-        options: ['80', '90', '100', '120'],
-        correct: 2
-    },
-    {
-        id: 'sample2',
-        title: 'Khám phá Tiếng Việt',
-        subject: 'Tiếng Việt',
-        grade: 'Lớp 4',
-        type: 'quiz',
-        description: 'Khám phá thế giới từ ngữ và câu văn.',
-        icon: '📚',
-        author: 'Đại Dương Tri Thức',
-        plays: 85,
-        question: 'Từ nào sau đây là danh từ?',
-        options: ['Chạy', 'Xinh đẹp', 'Học sinh', 'Nhanh chóng'],
-        correct: 2
-    },
-    {
-        id: 'sample3',
-        title: 'Nhà thám hiểm đại dương',
-        subject: 'Khoa học',
-        grade: 'Lớp 4',
-        type: 'quiz',
-        description: 'Cùng tìm hiểu thế giới tự nhiên.',
-        icon: '🪼',
-        author: 'Đại Dương Tri Thức',
-        plays: 96,
-        question: 'Động vật nào sau đây sống dưới nước?',
-        options: ['Con mèo', 'Cá heo', 'Con gà', 'Con thỏ'],
-        correct: 1
-    }
-];
-
-let games = [];
-let activeFilter = '';
-let currentGame = null;
-let favorites = JSON.parse(localStorage.getItem('oceanFavorites') || '[]');
-
-try {
-    const saved = JSON.parse(localStorage.getItem('oceanGames') || '[]');
-    games = [...sampleGames, ...saved];
-} catch (e) {
-    games = [...sampleGames];
-}
-
-// ========================================
-// HIỂN THỊ TRÒ CHƠI
-// ========================================
-
-function renderGames() {
-    const grid = document.getElementById('gameGrid');
-    const keyword = document.getElementById('searchInput').value.toLowerCase();
-    const subject = document.getElementById('subjectFilter').value;
-
-    let filtered = games.filter(game => {
-        const text = (game.title + ' ' + game.subject + ' ' + game.author + ' ' + game.description).toLowerCase();
-        const matchSearch = text.includes(keyword);
-        const matchSubject = !subject || game.subject === subject;
-        const matchType = !activeFilter ||
-            (activeFilter === 'favorite' ? favorites.includes(game.id) : game.type === activeFilter);
-
-        return matchSearch && matchSubject && matchType;
-    });
-
-    grid.innerHTML = '';
-
-    document.getElementById('emptyGames').classList.toggle('hidden', filtered.length > 0);
-    document.getElementById('gameCount').textContent = games.length;
-
-    filtered.forEach(game => {
-        const favorite = favorites.includes(game.id);
-
-        const card = document.createElement('div');
-        card.className = 'ocean-card overflow-hidden';
-
-        card.innerHTML = `
-            <div class="h-40 bg-gradient-to-br from-pink-300 via-fuchsia-400 to-purple-600 flex items-center justify-center relative">
-                <div class="text-7xl drop-shadow-lg">${game.icon || '🎮'}</div>
-                <span class="absolute top-3 left-3 bg-white/95 rounded-full px-3 py-1 text-xs font-black text-purple-900">${escapeHTML(game.subject)}</span>
-                <button class="absolute top-3 right-3 bg-white rounded-full w-9 h-9 text-lg shadow" onclick="toggleFavorite('${game.id}')">${favorite ? '❤️' : '🤍'}</button>
-            </div>
-            <div class="p-5">
-                <div class="flex justify-between items-center gap-2">
-                    <span class="tag">${escapeHTML(game.grade)}</span>
-                    <span class="text-xs text-purple-600 font-bold">${game.plays || 0} lượt chơi</span>
-                </div>
-                <h3 class="text-xl font-bold text-purple-950 mt-3">${escapeHTML(game.title)}</h3>
-                <p class="text-sm text-purple-800/75 font-bold mt-2 min-h-[40px]">${escapeHTML(game.description || '')}</p>
-                <div class="text-xs text-purple-500 font-bold mt-3">✍️ ${escapeHTML(game.author || 'Giáo viên')}</div>
-                <button onclick="playGame('${game.id}')" class="ocean-button w-full py-3 mt-4 font-black">
-                    Chơi ngay <i class="fa-solid fa-arrow-right ml-2"></i>
-                </button>
-            </div>
-        `;
-
-        grid.appendChild(card);
-    });
-}
-
-function escapeHTML(value) {
-    return String(value ?? '').replace(/[&<>"']/g, c => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-    })[c]);
-}
-
-function filterType(type) {
-    activeFilter = type;
-    renderGames();
-}
-
-function chooseSubject(subject) {
-    document.getElementById('subjectFilter').value = subject;
-    document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
-    renderGames();
-}
-
-function toggleFavorite(id) {
-    favorites = favorites.includes(id)
-        ? favorites.filter(x => x !== id)
-        : [...favorites, id];
-
-    localStorage.setItem('oceanFavorites', JSON.stringify(favorites));
-    renderGames();
-}
-
-document.getElementById('searchInput').addEventListener('input', renderGames);
-document.getElementById('subjectFilter').addEventListener('change', renderGames);
-
-// ========================================
-// TẠO TRÒ CHƠI
-// ========================================
-
-function openCreator() {
-    document.getElementById('creatorModal').classList.add('active');
-}
-
-function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
-}
-
-document.getElementById('newType').addEventListener('change', function () {
-    const isQuiz = this.value === 'quiz';
-    document.getElementById('questionBuilder').style.display = isQuiz ? 'block' : 'none';
-    document.getElementById('questionText').required = isQuiz;
-    document.getElementById('optionA').required = isQuiz;
-    document.getElementById('optionB').required = isQuiz;
-    document.getElementById('optionC').required = isQuiz;
-    document.getElementById('optionD').required = isQuiz;
-});
-
-document.getElementById('createForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const type = document.getElementById('newType').value;
-
-    const game = {
-        id: 'game_' + Date.now(),
-        title: document.getElementById('newTitle').value.trim(),
-        subject: document.getElementById('newSubject').value,
-        grade: document.getElementById('newGrade').value,
-        type: type,
-        description: document.getElementById('newDescription').value.trim(),
-        author: 'Giáo viên',
-        plays: 0,
-        icon: type === 'quiz' ? '📝' : '🎡'
-    };
-
-    if (type === 'quiz') {
-        game.question = document.getElementById('questionText').value.trim();
-        game.options = [
-            document.getElementById('optionA').value.trim(),
-            document.getElementById('optionB').value.trim(),
-            document.getElementById('optionC').value.trim(),
-            document.getElementById('optionD').value.trim()
-        ];
-        game.correct = Number(document.getElementById('correctAnswer').value);
-    }
-
-    games.push(game);
-    saveGames();
-    renderGames();
-
-    this.reset();
-    document.getElementById('questionBuilder').style.display = 'block';
-    closeModal('creatorModal');
-
-    document.getElementById('games').scrollIntoView({ behavior: 'smooth' });
-
-    if (window.confetti) confetti({ particleCount: 100, spread: 70, origin: { y: 0.7 } });
-    alert('🎉 Đã tạo trò chơi thành công trên trình duyệt này!');
-});
-
-function saveGames() {
-    const customGames = games.filter(g => !String(g.id).startsWith('sample'));
-    localStorage.setItem('oceanGames', JSON.stringify(customGames));
-}
-
-// ========================================
-// CHƠI TRÒ CHƠI
-// ========================================
-
-function playGame(id) {
-    currentGame = games.find(g => g.id === id);
-    if (!currentGame) return;
-
-    currentGame.plays = (currentGame.plays || 0) + 1;
-    saveGames();
-    renderGames();
-
-    const content = document.getElementById('playContent');
-
-    if (currentGame.type === 'wheel') {
-        content.innerHTML = `
-            <h2 class="text-2xl font-bold text-purple-950 text-center">${escapeHTML(currentGame.title)}</h2>
-            <div class="text-8xl text-center my-8 transition-transform duration-700" id="wheelIcon">🎡</div>
-            <p class="text-center text-purple-700 font-bold">Nhấn nút để quay vòng may mắn!</p>
-            <button class="ocean-button w-full py-4 font-black mt-5" onclick="spinWheel()">QUAY NGAY!</button>
-            <div id="wheelResult" class="text-center text-xl font-black text-pink-600 mt-5"></div>
-        `;
-    } else {
-        const labels = ['A', 'B', 'C', 'D'];
-        content.innerHTML = `
-            <div class="text-center">
-                <span class="section-label">${escapeHTML(currentGame.subject)}</span>
-                <h2 class="text-2xl font-bold text-purple-950 mt-4">${escapeHTML(currentGame.title)}</h2>
-                <div class="text-sm text-purple-500 font-bold mt-2">Câu hỏi thử thách</div>
-                <p class="text-xl font-black text-purple-950 mt-5">${escapeHTML(currentGame.question || '')}</p>
-            </div>
-            <div class="grid grid-cols-1 gap-3 mt-6" id="optionsContainer">
-                ${(currentGame.options || []).map((option, index) =>
-                    `<button class="game-option text-left" onclick="answerQuestion(${index}, this)">
-                        <span class="inline-block w-7 h-7 rounded-full bg-fuchsia-100 text-purple-900 text-center leading-7 mr-2 font-black">${labels[index]}</span>
-                        ${escapeHTML(option)}
-                    </button>`
-                ).join('')}
-            </div>
-            <div id="quizFeedback" class="text-center font-black text-lg mt-5"></div>
-        `;
-    }
-
-    document.getElementById('playModal').classList.add('active');
-}
-
-function answerQuestion(selectedIndex, btn) {
-    if (!currentGame) return;
-    const allButtons = document.querySelectorAll('#optionsContainer .game-option');
-    allButtons.forEach(b => b.disabled = true);
-
-    const feedback = document.getElementById('quizFeedback');
-
-    if (selectedIndex === currentGame.correct) {
-        btn.classList.add('correct');
-        feedback.innerHTML = '🎉 Tuyệt vời! Câu trả lời hoàn toàn chính xác!';
-        feedback.className = 'text-center font-black text-lg mt-5 text-emerald-600';
-        if (window.confetti) confetti({ particleCount: 90, spread: 65, origin: { y: 0.7 } });
-    } else {
-        btn.classList.add('wrong');
-        if (allButtons[currentGame.correct]) {
-            allButtons[currentGame.correct].classList.add('correct');
-        }
-        feedback.innerHTML = '🫧 Tiếc quá! Cùng xem đáp án đúng màu xanh nhé!';
-        feedback.className = 'text-center font-black text-lg mt-5 text-rose-600';
-    }
-}
-
-function spinWheel() {
-    const wheel = document.getElementById('wheelIcon');
-    const result = document.getElementById('wheelResult');
-    const prizes = [
-        '🌟 +10 điểm Ngôi Sao Tri Thức!',
-        '🫧 Nhận 1 Ngọc Trai Hoàng Hôn!',
-        '👏 Một tràng pháo tay thật lớn!',
-        '🎁 Quyền chọn bạn cùng trả lời!',
-        '🐬 Cá heo Bọt Biển khen ngợi bạn!'
-    ];
-
-    const deg = 720 + Math.floor(Math.random() * 720);
-    wheel.style.transform = `rotate(${deg}deg)`;
-    result.textContent = 'Đang quay...';
-
-    setTimeout(() => {
-        const chosen = prizes[Math.floor(Math.random() * prizes.length)];
-        result.textContent = chosen;
-        if (window.confetti) confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
-    }, 750);
-}
-
-// Khởi chạy hiển thị ban đầu
-renderGames();
-</script>
-</body>
-</html>
+    box-shadow: 0
